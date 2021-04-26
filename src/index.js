@@ -5,7 +5,7 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 ReactDOM.render(
   <BrowserRouter>
     <App />
@@ -14,3 +14,4 @@ ReactDOM.render(
 );
 
 reportWebVitals();
+serviceWorkerRegistration.register();
