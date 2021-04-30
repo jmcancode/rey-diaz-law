@@ -5,7 +5,9 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import "react-datetime/css/react-datetime.css";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+
 ReactDOM.render(
   <BrowserRouter>
     <App />

@@ -11,6 +11,7 @@ import { AuthProvider } from "./Firebase/context";
 import PrivateRoute from "./components/private.route";
 import UserAccount from "./pages/userAccount";
 import UserInbox from "./pages/inbox";
+import AdminDash from "./pages/admin.dash";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/sign-up" component={SignUp} />
             <Route path="/inbox" component={UserInbox} />
             <Route path="/myaccount" component={UserAccount} />
+            <Route path="/admin" component={AdminDash} />
             <PrivateRoute exact path="/" component={Dashboard} />
           </Switch>
         </div>

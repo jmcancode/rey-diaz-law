@@ -4,10 +4,10 @@ import TopNav from "../components/navBar";
 
 import DropZone from "react-dropzone";
 import { useDropzone } from "react-dropzone";
-
+import Datetime from "react-datetime";
 import { Plus } from "react-bootstrap-icons";
 import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from '@fullcalendar/daygrid'
+import dayGridPlugin from "@fullcalendar/daygrid";
 
 DropZone.autoDiscover = false;
 
@@ -120,10 +120,22 @@ export default function Dashboard() {
             </Card>
           </Col>
         </Row>
-        <Row xs={1} md={1} lg={1}>
+        <Row className="pt-3" xs={1} md={1} lg={1}>
           <Col>
             <FullCalendar
               plugins={[dayGridPlugin]}
+              initialView="dayGridMonth"
+              weekends={false}
+            />
+          </Col>
+          <Col className="pt-3 m-1">
+            <h5>Choose a date & time</h5>
+            <Datetime
+              closeOnSelect={true}
+              closeOnClickOutside={true}
+              dateFormat={true}
+              timeFormat={true}
+              value={new Date()}
             />
           </Col>
         </Row>

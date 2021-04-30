@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../assets/Rey-Diaz-Logo-White.png";
-import { Image, Navbar, NavDropdown, Nav, Container } from "react-bootstrap";
+import { Image, Navbar, NavDropdown, Nav } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../Firebase/context";
 
@@ -35,6 +35,9 @@ export default function TopNav() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mx-auto">
+            <Nav.Link as={Link} to="/admin">
+              Admin
+            </Nav.Link>
             <Nav.Link as={Link} to="/" href="#admin">
               Dashboard
             </Nav.Link>
