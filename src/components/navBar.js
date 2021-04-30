@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../assets/Rey-Diaz-Logo-White.png";
-import { Image, Navbar, NavDropdown, Nav } from "react-bootstrap";
+import { Image, Navbar, NavDropdown, Nav, Container } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../Firebase/context";
 
@@ -23,10 +23,10 @@ export default function TopNav() {
   return (
     <>
       <Navbar
-        sticky="top"
         collapseOnSelect
         expand="lg"
-        bg="transparent"
+        bg="dark"
+        className="w-100 d-flex"
         variant="dark"
       >
         <Navbar.Brand href="#home" as={Link} to="/">

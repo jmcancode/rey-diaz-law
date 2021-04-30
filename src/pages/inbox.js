@@ -9,7 +9,7 @@ const UserInbox = () => {
       <Container>
         <Row>
           <Col>
-            <p className="text-white text-center"> User inbox</p>
+            <p className=" text-center"> User inbox</p>
           </Col>
         </Row>
       </Container>

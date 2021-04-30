@@ -9,7 +9,7 @@ const UserAccount = () => {
       <Container>
         <Row>
           <Col>
-            <p className="text-white text-center">User account page</p>
+            <p className="text-center">User account page</p>
           </Col>
         </Row>
       </Container>
