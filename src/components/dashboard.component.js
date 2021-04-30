@@ -8,8 +8,13 @@ import Datetime from "react-datetime";
 import { Plus } from "react-bootstrap-icons";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
 
 DropZone.autoDiscover = false;
+
+const handleDateClick = (arg) => {
+  alert(arg.dateStr);
+};
 
 export default function Dashboard() {
   const [files, setFile] = useState([]);
@@ -123,9 +128,10 @@ export default function Dashboard() {
         <Row className="pt-3" xs={1} md={1} lg={1}>
           <Col>
             <FullCalendar
-              plugins={[dayGridPlugin]}
+              plugins={[dayGridPlugin, interactionPlugin]}
               initialView="dayGridMonth"
               weekends={false}
+              dateClick={handleDateClick}
             />
           </Col>
           <Col className="pt-3 m-1">
