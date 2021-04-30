@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { Alert } from "react-bootstrap";
 import { useAuth } from "../Firebase/context";
 import { Link, useHistory } from "react-router-dom";
+import { Form, Container, Card } from "react-bootstrap";
 
 export default function SignUp() {
   const emailRef = useRef();
@@ -34,73 +35,77 @@ export default function SignUp() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Register</h3>
-      {error && <Alert variant="danger">{error}</Alert>}
-      <div className="form-group">
-        <label>First name</label>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="First name"
-          ref={firstNameRef}
-          required
-        />
-      </div>
+    <Container className="pt-5 mt-5">
+      <Card body>
+        <Form onSubmit={handleSubmit}>
+          <h3>Register</h3>
+          {error && <Alert variant="danger">{error}</Alert>}
+          <div className="form-group">
+            <label>First name</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="First name"
+              ref={firstNameRef}
+              required
+            />
+          </div>
 
-      <div className="form-group">
-        <label>Last name</label>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Last name"
-          ref={lastNameRef}
-          required
-        />
-      </div>
+          <div className="form-group">
+            <label>Last name</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Last name"
+              ref={lastNameRef}
+              required
+            />
+          </div>
 
-      <div className="form-group">
-        <label>Email</label>
-        <input
-          type="email"
-          className="form-control"
-          placeholder="Enter email"
-          ref={emailRef}
-          required
-        />
-      </div>
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              className="form-control"
+              placeholder="Enter email"
+              ref={emailRef}
+              required
+            />
+          </div>
 
-      <div className="form-group">
-        <label>Password</label>
-        <input
-          type="password"
-          className="form-control"
-          placeholder="Enter password"
-          ref={passwordRef}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label>Confirm Password</label>
-        <input
-          type="password"
-          className="form-control"
-          placeholder="Confirm password"
-          ref={passwordConfirmRef}
-          required
-        />
-      </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Enter password"
+              ref={passwordRef}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Confirm Password</label>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Confirm password"
+              ref={passwordConfirmRef}
+              required
+            />
+          </div>
 
-      <button
-        type="submit"
-        className="btn btn-dark btn-lg btn-block"
-        disabled={loading}
-      >
-        Register
-      </button>
-      <p className="forgot-password text-right">
-        Already registered? <Link to="/sign-in">log in</Link>
-      </p>
-    </form>
+          <button
+            type="submit"
+            className="btn btn-dark btn-lg btn-block"
+            disabled={loading}
+          >
+            Register
+          </button>
+          <p className="forgot-password text-right">
+            Already registered? <Link to="/sign-in">log in</Link>
+          </p>
+        </Form>
+      </Card>
+    </Container>
   );
 }

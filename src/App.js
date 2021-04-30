@@ -9,7 +9,8 @@ import Dashboard from "./components/dashboard.component.js";
 
 import { AuthProvider } from "./Firebase/context";
 import PrivateRoute from "./components/private.route";
-// import TopNav from "./components/navBar";
+import UserAccount from "./pages/userAccount";
+import UserInbox from "./pages/inbox";
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
           <Switch>
             <Route path="/sign-in" component={Login} />
             <Route path="/sign-up" component={SignUp} />
+            <Route path="/inbox" component={UserInbox} />
+            <Route path="/myaccount" component={UserAccount} />
             <PrivateRoute exact path="/" component={Dashboard} />
           </Switch>
         </div>
