@@ -16,15 +16,11 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="App">
-          <div className="outer">
-            <div className="inner">
-              <Switch>
-                <Route path="/sign-in" component={Login} />
-                <Route path="/sign-up" component={SignUp} />
-                <PrivateRoute exact path="/" component={Dashboard} />
-              </Switch>
-            </div>
-          </div>
+          <Switch>
+            <Route path="/sign-in" component={Login} />
+            <Route path="/sign-up" component={SignUp} />
+            <PrivateRoute exact path="/" component={Dashboard} />
+          </Switch>
         </div>
       </Router>
     </AuthProvider>

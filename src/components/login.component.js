@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useAuth } from "../Firebase/context";
 import { useHistory, Link } from "react-router-dom";
 import { Alert } from "react-bootstrap";
-
+import { Container, Row, Col } from "react-bootstrap";
 export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -27,55 +27,61 @@ export default function Login() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Log in</h3>
-      {error && <Alert variant="danger">{error}</Alert>}
-      <div className="form-group">
-        <label>Email</label>
-        <input
-          type="email"
-          className="form-control"
-          placeholder="Enter email"
-          ref={emailRef}
-          required
-        />
-      </div>
+    <Container className="h-100 w-100">
+      <Row>
+        <Col>
+          <form onSubmit={handleSubmit}>
+            <h3>Log in</h3>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                className="form-control"
+                placeholder="Enter email"
+                ref={emailRef}
+                required
+              />
+            </div>
 
-      <div className="form-group">
-        <label>Password</label>
-        <input
-          type="password"
-          className="form-control"
-          placeholder="Enter password"
-          ref={passwordRef}
-          required
-        />
-      </div>
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Enter password"
+                ref={passwordRef}
+                required
+              />
+            </div>
 
-      <div className="form-group">
-        <div className="custom-control custom-checkbox">
-          <input
-            type="checkbox"
-            className="custom-control-input"
-            id="customCheck1"
-          />
-          <label className="custom-control-label" htmlFor="customCheck1">
-            Remember me
-          </label>
-        </div>
-      </div>
+            <div className="form-group">
+              <div className="custom-control custom-checkbox">
+                <input
+                  type="checkbox"
+                  className="custom-control-input"
+                  id="customCheck1"
+                />
+                <label className="custom-control-label" htmlFor="customCheck1">
+                  Remember me
+                </label>
+              </div>
+            </div>
 
-      <button
-        type="submit"
-        className="btn btn-dark btn-lg btn-block"
-        disabled={loading}
-      >
-        Sign in
-      </button>
-      {error && <Alert variant="danger">{error}</Alert>}
-      <p className="forgot-password text-right">
-        Need an account? Sign-up <Link to="sign-up">here</Link>
-      </p>
-    </form>
+            <button
+              type="submit"
+              className="btn btn-dark btn-lg btn-block"
+              disabled={loading}
+            >
+              Sign in
+            </button>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <p className="forgot-password text-right">
+              Need an account? Sign-up <Link to="sign-up">here</Link>
+            </p>
+          </form>
+        </Col>
+      </Row>
+    </Container>
   );
 }

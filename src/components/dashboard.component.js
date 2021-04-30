@@ -1,11 +1,14 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 import SidebarExample from "./sidebar";
-// import { useAuth } from "../Firebase/context";
+
+import TopNav from "../components/navBar";
 
 export default function Dashboard() {
   return (
     <>
       <div>
+        <TopNav />
         <SidebarExample />
       </div>
     </>

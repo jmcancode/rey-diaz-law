@@ -1,32 +1,8 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useHistory,
-} from "react-router-dom";
+import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
 import { useAuth } from "../Firebase/context";
 import { Alert } from "react-bootstrap";
-
-const routes = [
-  {
-    path: "/",
-    exact: true,
-    sidebar: () => <div style={{ color: "#c02626" }}>Home</div>,
-    main: () => <h2>Home</h2>,
-  },
-  {
-    path: "/bubblegum",
-    sidebar: () => <div style={{ color: "#c02626" }}>Billing</div>,
-    main: () => <h2>Billing</h2>,
-  },
-  {
-    path: "/shoelaces",
-    sidebar: () => <div style={{ color: "#c02626" }}>Tickets 🎫 </div>,
-    main: () => <h2>Tickets 🎫 </h2>,
-  },
-];
+import { Container, Row } from "react-bootstrap";
 
 export default function SidebarExample() {
   const history = useHistory();
@@ -47,19 +23,14 @@ export default function SidebarExample() {
 
   return (
     <Router>
-      <div style={{ display: "flex" }}>
+      <div>
         <div
           style={{
-            position: "absolute",
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
             padding: "10px",
-            width: "15%",
-            height: "100vh",
+            height: "50vh",
             background: "#bfa36f",
             paddingTop: "10%",
+            width: "35%",
           }}
         >
           <ul style={{ listStyleType: "none", padding: 0 }}>

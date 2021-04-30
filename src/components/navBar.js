@@ -1,37 +1,27 @@
 import React from "react";
 import logo from "../assets/Rey-Diaz-Logo-White.png";
-import { Image } from "react-bootstrap";
+import { Image, Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function TopNav() {
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light fixed-top">
-        <div className="container">
-          <Link className="navbar-brand" to={"/sign-in"}>
-            <Image src={logo} width={250} fluid />
-          </Link>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link className="nav-link text-muted" to={"./sign-in"}>
-                  Log Out
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link text-muted" to={"/sign-in"}>
-                  Sign in
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link text-muted" to={"/sign-up"}>
-                  Sign up
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="light">
+        <Navbar.Brand href="#home">
+          <Image src={logo} width={150} fluid />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="ml-auto">
+            <Nav.Link className="text-muted" href="#deets">
+              My Account
+            </Nav.Link>
+            <Nav.Link className="text-muted" eventKey={2} href="#memes">
+              Settings
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     </>
   );
 }
