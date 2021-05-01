@@ -2,37 +2,42 @@ import React from "react";
 
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-
-import { Doughnut } from "react-chartjs-2";
+import cellEditFactory from "react-bootstrap-table2-editor";
 
 import TopNav from "../components/navBar";
 
-const products = [
+const clients = [
   {
     id: 1,
     name: "John Doe ",
     price: 100,
+    progress: "100%",
   },
   {
     id: 2,
     name: "Jane Doe 2",
     price: 200,
+    progress: "100%",
   },
   {
     id: 3,
     name: "Juan Doe 3",
     price: 300,
+    progress: "25%",
   },
 ];
-
-const chartData = [
+const columns = [
   {
-    id: 1,
-    user: 12,
+    dataField: "id",
+    text: "Product ID",
   },
   {
-    id: 2,
-    user: 11,
+    dataField: "name",
+    text: "Product Name",
+  },
+  {
+    dataField: "price",
+    text: "Product Price",
   },
 ];
 
@@ -48,39 +53,39 @@ export default function AdminDash() {
         <Row className="pt-3" xs={3} md={3} lg={3}>
           <Col>
             <Card>
-              <Card.Body>
-                <p> Chart Data</p>
-                <Doughnut
-                  data={chartData}
-                  width="300"
-                  height="150"
-                  type="doughnut"
-                />
+              <Card.Body className="text-center">
+                <p>Some Component</p>
               </Card.Body>
             </Card>
           </Col>
           <Col>
             <Card>
-              <Card.Body>
-                <p>This is a admin dashboard sample...</p>
+              <Card.Body className="text-center">
+                <p>Some Component</p>
               </Card.Body>
             </Card>
           </Col>
           <Col>
             <Card>
-              <Card.Body>
-                <p>This is a admin dashboard sample...</p>
+              <Card.Body className="text-center">
+                <p>Some Component</p>
               </Card.Body>
             </Card>
           </Col>
         </Row>
         <Row className="pt-3" xs={1} md={1} lg={1}>
           <Col>
-            <BootstrapTable data={products} striped={true} hover={true}>
+            <BootstrapTable
+              cellEdit={cellEditFactory({ mode: "click" })}
+              data={clients}
+              striped={true}
+              hover={true}
+              columns={columns}
+            >
               <TableHeaderColumn
                 dataField="id"
                 isKey={true}
-                dataAlign="center"
+                dataAlign="left"
                 dataSort={true}
               >
                 Client ID
@@ -90,6 +95,12 @@ export default function AdminDash() {
               </TableHeaderColumn>
               <TableHeaderColumn dataField="price" dataFormat={priceFormatter}>
                 Client Balance
+              </TableHeaderColumn>
+              <TableHeaderColumn
+                dataField="progress"
+                dataFormat={priceFormatter}
+              >
+                On-boarding
               </TableHeaderColumn>
             </BootstrapTable>
           </Col>

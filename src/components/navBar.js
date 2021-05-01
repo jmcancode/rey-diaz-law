@@ -42,7 +42,7 @@ export default function TopNav() {
               Dashboard
             </Nav.Link>
             <Nav.Link as={Link} to="/inbox" href="#inbox">
-              Inbox
+              Chat
             </Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
             <NavDropdown title="Forms" id="collasible-nav-dropdown">
