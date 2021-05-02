@@ -1,5 +1,13 @@
 import React from "react";
-import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Form,
+  Button,
+  FormGroup,
+} from "react-bootstrap";
 import TopNav from "../components/navBar";
 
 import Avatar from "react-avatar";
@@ -55,7 +63,7 @@ const UserAccount = () => {
                     <Form.Label>State</Form.Label>
                     <Form.Control as="select" defaultValue="Choose...">
                       <option>Choose...</option>
-                      <option>Texas</option>
+                      <option>...</option>
                     </Form.Control>
                   </Form.Group>
 
@@ -66,15 +74,65 @@ const UserAccount = () => {
                 </Form.Row>
 
                 <Form.Group>
-                  <Form.File id="exampleFormControlFile1" />
+                  <Form.File id="exampleFormControlFile1" label="" />
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
-                  update
+                  Submit
                 </Button>
               </Form>
             </Col>
           </Row>
+        </Card>
+      </Container>
+      <Container className="pt-3">
+        <Row xs={1} md={1} lg={1}>
+          <Col>
+            <h5 className="ml-3">Your Documents</h5>
+          </Col>
+          <Col>
+            <Card className="p-3 m-3">
+              <Card.Body>
+                <p>This is where uploaded and downloaded doc will live</p>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+      <Container className="p-3">
+        <Card className="p-3 m-3">
+          <Card.Title className="ml-3">Payment Information</Card.Title>
+          <Form>
+            <FormGroup>
+              <Col>
+                <Form.Control
+                  className="mb-2"
+                  type="name"
+                  placeholder="Name on card"
+                />
+                <Form.Control
+                  className="mb-2"
+                  type="credit"
+                  placeholder="4242 4242 4242 4242"
+                />
+              </Col>
+              <Col>
+                <Form.Control
+                  className="mb-2"
+                  type="date"
+                  placeholder="MM/YY"
+                />
+                <Form.Control
+                  className="mb-2"
+                  type="number"
+                  placeholder="CVV"
+                />
+              </Col>
+            </FormGroup>
+            <Button className="ml-3" variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
         </Card>
       </Container>
     </>

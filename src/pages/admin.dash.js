@@ -3,6 +3,7 @@ import React from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import cellEditFactory from "react-bootstrap-table2-editor";
+import "react-icons";
 
 import TopNav from "../components/navBar";
 
@@ -41,7 +42,7 @@ const columns = [
   },
 ];
 
-function priceFormatter(cell, row) {
+function priceFormatter(cell, Row) {
   return '<i class="glyphicon glyphicon-usd"></i> ' + cell;
 }
 
