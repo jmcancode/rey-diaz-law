@@ -77,7 +77,15 @@ const UserAccount = () => {
                   <Form.File id="exampleFormControlFile1" label="" />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
+                <Button
+                  block
+                  style={{
+                    backgroundColor: "#bfa36f",
+                    borderColor: "transparent",
+                  }}
+                  variant="primary"
+                  type="submit"
+                >
                   Submit
                 </Button>
               </Form>
@@ -129,7 +137,15 @@ const UserAccount = () => {
                 />
               </Col>
             </FormGroup>
-            <Button className="ml-3" variant="primary" type="submit">
+            <Button
+              variant="primary"
+              type="submit"
+              style={{
+                backgroundColor: "#bfa36f",
+                borderColor: "transparent",
+              }}
+              block
+            >
               Submit
             </Button>
           </Form>

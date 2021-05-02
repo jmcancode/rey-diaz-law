@@ -9,6 +9,10 @@ import { Plus } from "react-bootstrap-icons";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import dykphoto from "../assets/adrian-n-FU4yhbdRAXU-unsplash.jpg";
+import glossphoto from "../assets/helena-lopes-2ozURDBsxqc-unsplash.jpg";
+import newsphoto from "../assets/tingey-injury-law-firm-yCdPU73kGSc-unsplash.jpg";
+import { Link } from "react-router-dom";
 
 DropZone.autoDiscover = false;
 
@@ -41,91 +45,54 @@ export default function Dashboard() {
   return (
     <>
       <TopNav />
-      <Container className="h-100 mt-1 mb-5">
+      <Container className="h-100 mt-3">
         <Row xs={1} md={3} lg={3}>
-          <Col sm>
-            <Card className="m-1">
-              <Card.Header>
-                <Nav variant="tabs" defaultActiveKey="#first">
-                  <Nav.Item>
-                    <Nav.Link href="#first">Active</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link href="#link">Link</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link href="#disabled" disabled>
-                      Disabled
-                    </Nav.Link>
-                  </Nav.Item>
-                </Nav>
-              </Card.Header>
+          <Col>
+            <Card>
+              <Card.Img variant="top" src={dykphoto} />
               <Card.Body>
-                <Card.Title>This is a test layout</Card.Title>
-                <Card.Text>
-                  With supporting text below as a natural lead-in to additional
-                  content.
+                <Card.Title>Did you know?</Card.Title>
+                <Card.Text className="text-left">
+                  The blog that keeps you informed. Learn more and share with
+                  your network.
                 </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
+                <Link to="/didyouknow" style={{ color: "#bfa36f" }}>
+                  Read More
+                </Link>
               </Card.Body>
             </Card>
           </Col>
-          <Col sm>
-            <Card className="m-1">
-              <Card.Header>
-                <Nav variant="tabs" defaultActiveKey="#first">
-                  <Nav.Item>
-                    <Nav.Link href="#first">Active</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link href="#link">Link</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link href="#disabled" disabled>
-                      Disabled
-                    </Nav.Link>
-                  </Nav.Item>
-                </Nav>
-              </Card.Header>
+          <Col>
+            <Card>
+              <Card.Img variant="top" src={glossphoto} alt="glossary-header" />
               <Card.Body>
-                <Card.Title>This is a test layout</Card.Title>
+                <Card.Title>Personal Injury Glossary</Card.Title>
                 <Card.Text>
-                  With supporting text below as a natural lead-in to additional
-                  content.
+                  Understanding whats to come and how it works.
                 </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
+                <Link to="/legalglossary" style={{ color: "#bfa36f" }}>
+                  Learn More
+                </Link>
               </Card.Body>
             </Card>
           </Col>
-          <Col sm>
-            <Card className="m-1">
-              <Card.Header>
-                <Nav variant="tabs" defaultActiveKey="#first">
-                  <Nav.Item>
-                    <Nav.Link href="#first">Active</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link href="#link">Link</Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link href="#disabled" disabled>
-                      Disabled
-                    </Nav.Link>
-                  </Nav.Item>
-                </Nav>
-              </Card.Header>
+          <Col>
+            <Card>
+              <Card.Img variant="top" src={newsphoto} alt="glossary-header" />
               <Card.Body>
-                <Card.Title>This is a test layout</Card.Title>
+                <Card.Title>Whats new</Card.Title>
                 <Card.Text>
-                  With supporting text below as a natural lead-in to additional
-                  content.
+                  General knowledge from the firm. A daily, weekly, bi-annual
+                  post.
                 </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
+                <Link to="/legalglossary" style={{ color: "#bfa36f" }}>
+                  Read more
+                </Link>
               </Card.Body>
             </Card>
           </Col>
         </Row>
-        <Row className="pt-3" xs={1} md={1} lg={1}>
+        <Row noGutters={true} className="pt-3" xs={1} md={1} lg={1}>
           <Col>
             <FullCalendar
               plugins={[dayGridPlugin, interactionPlugin]}
@@ -135,7 +102,7 @@ export default function Dashboard() {
             />
           </Col>
           <Col className="pt-3 m-1">
-            <h5>Choose a date & time</h5>
+            <h5>Request an appointment</h5>
             <Datetime
               closeOnSelect={true}
               closeOnClickOutside={true}

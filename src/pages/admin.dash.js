@@ -5,6 +5,10 @@ import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import "react-icons";
 
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
+
 import TopNav from "../components/navBar";
 
 const clients = [
@@ -13,18 +17,21 @@ const clients = [
     name: "John Doe ",
     price: 100,
     progress: "100%",
+    location: "San Antonio",
   },
   {
     id: 2,
     name: "Jane Doe 2",
     price: 200,
     progress: "100%",
+    location: "Laredo",
   },
   {
     id: 3,
     name: "Juan Doe 3",
     price: 300,
     progress: "25%",
+    location: "Del Rio",
   },
 ];
 const columns = [
@@ -40,11 +47,16 @@ const columns = [
     dataField: "price",
     text: "Product Price",
   },
+  { dataField: "location", text: "location" },
 ];
 
 function priceFormatter(cell, Row) {
   return '<i class="glyphicon glyphicon-usd"></i> ' + cell;
 }
+
+const handleDateClick = (arg) => {
+  alert(arg.dateStr);
+};
 
 export default function AdminDash() {
   return (
@@ -54,22 +66,22 @@ export default function AdminDash() {
         <Row className="pt-3" xs={3} md={3} lg={3}>
           <Col>
             <Card>
-              <Card.Body className="text-center">
-                <p>Some Component</p>
+              <Card.Body className=" text-uppercase">
+                <p>ONE</p>
               </Card.Body>
             </Card>
           </Col>
           <Col>
             <Card>
-              <Card.Body className="text-center">
-                <p>Some Component</p>
+              <Card.Body className="text-left text-uppercase">
+                <p>TWO</p>
               </Card.Body>
             </Card>
           </Col>
           <Col>
             <Card>
-              <Card.Body className="text-center">
-                <p>Some Component</p>
+              <Card.Body className="text-left text-uppercase">
+                <p>THREE</p>
               </Card.Body>
             </Card>
           </Col>
@@ -103,7 +115,34 @@ export default function AdminDash() {
               >
                 On-boarding
               </TableHeaderColumn>
+              <TableHeaderColumn
+                dataField="location"
+                dataFormat={priceFormatter}
+              >
+                Location
+              </TableHeaderColumn>
             </BootstrapTable>
+          </Col>
+        </Row>
+        <Row className="pt-3">
+          <Col>
+            <Card>
+              <Card.Body>
+                <h1 className="text-center text-uppercase">
+                  Another Component
+                </h1>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+        <Row className="pt-3" xs={1} md={1} lg={1}>
+          <Col>
+            <FullCalendar
+              plugins={[dayGridPlugin, interactionPlugin]}
+              initialView="dayGridMonth"
+              weekends={false}
+              dateClick={handleDateClick}
+            />
           </Col>
         </Row>
       </Container>

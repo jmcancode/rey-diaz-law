@@ -26,13 +26,19 @@ export default function Login() {
 
     setLoading(false);
   }
-  
+
   return (
     <>
       <Container className=" mt-5 pt-5">
         <Row xs={1} md={1} lg={1}>
           <Col>
-            <Image fluid src={loginLogo} className="w-100 p-5" />
+            <Image
+              fluid
+              src={loginLogo}
+              width={100}
+              h={100}
+              className="w-100 p-5"
+            />
           </Col>
           <Col>
             <h2 className="text-center text-uppercase text-muted pb-2">

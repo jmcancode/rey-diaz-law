@@ -12,6 +12,9 @@ import PrivateRoute from "./components/private.route";
 import UserAccount from "./pages/userAccount";
 import UserInbox from "./pages/inbox";
 import AdminDash from "./pages/admin.dash";
+import DidYouKnowDetail from "./pages/didyouknowdetails";
+import LegalGlossary from "./pages/glossary";
+import LegalResources from "./pages/resources";
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
             <Route path="/myaccount" component={UserAccount} />
             <Route path="/admin" component={AdminDash} />
             <PrivateRoute exact path="/" component={Dashboard} />
+            <PrivateRoute path="/didyouknow" component={DidYouKnowDetail} />
+            <PrivateRoute path="/legalglossary" component={LegalGlossary} />
+            <PrivateRoute path="/resources" component={LegalResources} />
           </Switch>
         </div>
       </Router>
