@@ -1,8 +1,6 @@
 import React from "react";
 
 import { Container, Row, Col, Card } from "react-bootstrap";
-import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-import cellEditFactory from "react-bootstrap-table2-editor";
 import "react-icons";
 
 import FullCalendar from "@fullcalendar/react";
@@ -10,49 +8,6 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
 import TopNav from "../components/navBar";
-
-const clients = [
-  {
-    id: 1,
-    name: "John Doe ",
-    price: 100,
-    progress: "100%",
-    location: "San Antonio",
-  },
-  {
-    id: 2,
-    name: "Jane Doe 2",
-    price: 200,
-    progress: "100%",
-    location: "Laredo",
-  },
-  {
-    id: 3,
-    name: "Juan Doe 3",
-    price: 300,
-    progress: "25%",
-    location: "Del Rio",
-  },
-];
-const columns = [
-  {
-    dataField: "id",
-    text: "Product ID",
-  },
-  {
-    dataField: "name",
-    text: "Product Name",
-  },
-  {
-    dataField: "price",
-    text: "Product Price",
-  },
-  { dataField: "location", text: "location" },
-];
-
-function priceFormatter(cell, Row) {
-  return '<i class="glyphicon glyphicon-usd"></i> ' + cell;
-}
 
 const handleDateClick = (arg) => {
   alert(arg.dateStr);
@@ -63,74 +18,30 @@ export default function AdminDash() {
     <>
       <TopNav />
       <Container className="h-100 mt-1 mb-5">
-        <Row className="pt-3" xs={3} md={3} lg={3}>
+        <Row className="pt-3" xs={2} md={2} lg={2}>
           <Col>
             <Card>
               <Card.Body className=" text-uppercase">
-                <p>ONE</p>
+                <p>DYK Post</p>
               </Card.Body>
             </Card>
           </Col>
           <Col>
             <Card>
               <Card.Body className="text-left text-uppercase">
-                <p>TWO</p>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col>
-            <Card>
-              <Card.Body className="text-left text-uppercase">
-                <p>THREE</p>
+                <p>Blog Post</p>
               </Card.Body>
             </Card>
           </Col>
         </Row>
         <Row className="pt-3" xs={1} md={1} lg={1}>
-          <Col>
-            <BootstrapTable
-              cellEdit={cellEditFactory({ mode: "click" })}
-              data={clients}
-              striped={true}
-              hover={true}
-              columns={columns}
-            >
-              <TableHeaderColumn
-                dataField="id"
-                isKey={true}
-                dataAlign="left"
-                dataSort={true}
-              >
-                Client ID
-              </TableHeaderColumn>
-              <TableHeaderColumn dataField="name" dataSort={true}>
-                Client Name
-              </TableHeaderColumn>
-              <TableHeaderColumn dataField="price" dataFormat={priceFormatter}>
-                Client Balance
-              </TableHeaderColumn>
-              <TableHeaderColumn
-                dataField="progress"
-                dataFormat={priceFormatter}
-              >
-                On-boarding
-              </TableHeaderColumn>
-              <TableHeaderColumn
-                dataField="location"
-                dataFormat={priceFormatter}
-              >
-                Location
-              </TableHeaderColumn>
-            </BootstrapTable>
-          </Col>
+          <Col></Col>
         </Row>
         <Row className="pt-3">
           <Col>
             <Card>
               <Card.Body>
-                <h1 className="text-center text-uppercase">
-                  Another Component
-                </h1>
+                <h1 className="text-left text-uppercase">Clients</h1>
               </Card.Body>
             </Card>
           </Col>
@@ -143,6 +54,25 @@ export default function AdminDash() {
               weekends={false}
               dateClick={handleDateClick}
             />
+          </Col>
+        </Row>
+        <Row className="w-100" xs={1} md={1} lg={1}>
+          <Col className="h-100">
+            <p className="text-muted text-center mt-3" style={{ fontSize: 10 }}>
+              San Antonio Website Design by
+              <a
+                target="__blank"
+                href="https://www.j12designs.com"
+                rel="noreferr noopener"
+                style={{
+                  textDecoration: "none",
+                  color: "#2f2f2f",
+                  paddingLeft: 3,
+                }}
+              >
+                J12 Designs
+              </a>{" "}
+            </p>
           </Col>
         </Row>
       </Container>

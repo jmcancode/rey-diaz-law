@@ -15,6 +15,7 @@ import AdminDash from "./pages/admin.dash";
 import DidYouKnowDetail from "./pages/didyouknowdetails";
 import LegalGlossary from "./pages/glossary";
 import LegalResources from "./pages/resources";
+import WhatsNewBlog from "./pages/whatsnew";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <PrivateRoute path="/didyouknow" component={DidYouKnowDetail} />
             <PrivateRoute path="/legalglossary" component={LegalGlossary} />
             <PrivateRoute path="/resources" component={LegalResources} />
+            <PrivateRoute path="/whatsnew" component={WhatsNewBlog} />
           </Switch>
         </div>
       </Router>

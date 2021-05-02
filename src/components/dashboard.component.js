@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Card, Nav, Button } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import TopNav from "../components/navBar";
 
 import DropZone from "react-dropzone";
 import { useDropzone } from "react-dropzone";
 import Datetime from "react-datetime";
 import { Plus } from "react-bootstrap-icons";
+
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+
 import dykphoto from "../assets/adrian-n-FU4yhbdRAXU-unsplash.jpg";
-import glossphoto from "../assets/helena-lopes-2ozURDBsxqc-unsplash.jpg";
 import newsphoto from "../assets/tingey-injury-law-firm-yCdPU73kGSc-unsplash.jpg";
 import { Link } from "react-router-dom";
 
@@ -46,9 +47,9 @@ export default function Dashboard() {
     <>
       <TopNav />
       <Container className="h-100 mt-3">
-        <Row xs={1} md={3} lg={3}>
-          <Col>
-            <Card>
+        <Row noGutters={true} xs={1} md={2} lg={2}>
+          <Col className="p-1">
+            <Card className="h-100 p-3">
               <Card.Img variant="top" src={dykphoto} />
               <Card.Body>
                 <Card.Title>Did you know?</Card.Title>
@@ -62,30 +63,21 @@ export default function Dashboard() {
               </Card.Body>
             </Card>
           </Col>
-          <Col>
+          <Col className="p-1 h-100">
             <Card>
-              <Card.Img variant="top" src={glossphoto} alt="glossary-header" />
-              <Card.Body>
-                <Card.Title>Personal Injury Glossary</Card.Title>
-                <Card.Text>
-                  Understanding whats to come and how it works.
-                </Card.Text>
-                <Link to="/legalglossary" style={{ color: "#bfa36f" }}>
-                  Learn More
-                </Link>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col>
-            <Card>
-              <Card.Img variant="top" src={newsphoto} alt="glossary-header" />
+              <Card.Img
+                className="p-3"
+                variant="top"
+                src={newsphoto}
+                alt="glossary-header"
+              />
               <Card.Body>
                 <Card.Title>Whats new</Card.Title>
                 <Card.Text>
                   General knowledge from the firm. A daily, weekly, bi-annual
                   post.
                 </Card.Text>
-                <Link to="/legalglossary" style={{ color: "#bfa36f" }}>
+                <Link to="/whatsnew" style={{ color: "#bfa36f" }}>
                   Read more
                 </Link>
               </Card.Body>
@@ -129,7 +121,7 @@ export default function Dashboard() {
         <Row className="w-100" xs={1} md={1} lg={1}>
           <Col className="h-100">
             <p className="text-muted text-center mt-3" style={{ fontSize: 10 }}>
-              Built with 🫀 by
+              San Antonio Website Design by
               <a
                 target="__blank"
                 href="https://www.j12designs.com"

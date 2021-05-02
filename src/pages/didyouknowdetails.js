@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import TopNav from "../components/navBar";
 import featurePhoto from "../assets/adrian-n-FU4yhbdRAXU-unsplash.jpg";
-import { FiShare, FiSave, FiPlus } from "react-icons/fi";
+import { FiShare, FiPlus } from "react-icons/fi";
 export default function DidYouKnowDetail() {
   return (
     <>

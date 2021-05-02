@@ -44,15 +44,26 @@ export default function TopNav() {
             <Nav.Link as={Link} to="/inbox" href="#inbox">
               Chat
             </Nav.Link>
-            <Nav.Link as={Link} to="/resources">
-              Resources
-            </Nav.Link>
-            <NavDropdown title="Forms" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Form 1</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Form 1.1</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Form 1.2</NavDropdown.Item>
+            <NavDropdown title="Resouces" id="collasible-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/resources" href="#action/3.1">
+                Roadside Assistance
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">Texas Laws</NavDropdown.Item>
+              <NavDropdown.Item
+                as={Link}
+                to="/legalglossary"
+                href="#action/3.3"
+              >
+                Personal Injury Glossary
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Form 3</NavDropdown.Item>
+              <NavDropdown.Item
+                target="__blank"
+                rel="noreffer nolooper"
+                href="https://reydiaz.law/"
+              >
+                Rey Diaz Law
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>

@@ -108,48 +108,71 @@ const UserAccount = () => {
         </Row>
       </Container>
       <Container className="p-3">
-        <Card className="p-3 m-3">
-          <Card.Title className="ml-3">Payment Information</Card.Title>
-          <Form>
-            <FormGroup>
-              <Col>
-                <Form.Control
-                  className="mb-2"
-                  type="name"
-                  placeholder="Name on card"
-                />
-                <Form.Control
-                  className="mb-2"
-                  type="credit"
-                  placeholder="4242 4242 4242 4242"
-                />
-              </Col>
-              <Col>
-                <Form.Control
-                  className="mb-2"
-                  type="date"
-                  placeholder="MM/YY"
-                />
-                <Form.Control
-                  className="mb-2"
-                  type="number"
-                  placeholder="CVV"
-                />
-              </Col>
-            </FormGroup>
-            <Button
-              variant="primary"
-              type="submit"
-              style={{
-                backgroundColor: "#bfa36f",
-                borderColor: "transparent",
-              }}
-              block
-            >
-              Submit
-            </Button>
-          </Form>
-        </Card>
+        <Row>
+          <Col>
+            <Card className="p-3 m-3">
+              <Card.Title className="ml-3">Payment Information</Card.Title>
+              <Form>
+                <FormGroup>
+                  <Col>
+                    <Form.Control
+                      className="mb-2"
+                      type="name"
+                      placeholder="Name on card"
+                    />
+                    <Form.Control
+                      className="mb-2"
+                      type="credit"
+                      placeholder="4242 4242 4242 4242"
+                    />
+                  </Col>
+                  <Col>
+                    <Form.Control
+                      className="mb-2"
+                      type="date"
+                      placeholder="MM/YY"
+                    />
+                    <Form.Control
+                      className="mb-2"
+                      type="number"
+                      placeholder="CVV"
+                    />
+                  </Col>
+                </FormGroup>
+                <Button
+                  variant="primary"
+                  type="submit"
+                  style={{
+                    backgroundColor: "#bfa36f",
+                    borderColor: "transparent",
+                  }}
+                  block
+                >
+                  Submit
+                </Button>
+              </Form>
+            </Card>
+          </Col>
+        </Row>
+        <Row className="w-100" xs={1} md={1} lg={1}>
+          <Col className="h-100">
+            <p className="text-muted text-center mt-3" style={{ fontSize: 10 }}>
+              San Antonio Website Design by
+              <a
+                target="__blank"
+                href="https://www.j12designs.com"
+                rel="noreferr noopener"
+                style={{
+                  textDecoration: "none",
+                  color: "#2f2f2f",
+                  paddingLeft: 3,
+                }}
+              >
+                J12 Designs
+              </a>{" "}
+            </p>
+          </Col>
+        </Row>
       </Container>
     </>
   );
