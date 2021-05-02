@@ -7,10 +7,10 @@ export default function WhatsNewBlog() {
   return (
     <>
       <TopNav />
-      <Container className="w-100 h-100 pt-3">
-        <Row className="p-3" xs={1} md={1} lg={1}>
+      <Container fluid className="w-100 h-100 pt-3">
+        <Row xs={1} md={1} lg={1}>
           <Col>
-            <Card className="p-3" style={{ width: "18rem" }}>
+            <Card >
               <Card.Img variant="top" src={featurephoto} />
               <Card.Body>
                 <Card.Title>Whats new</Card.Title>
@@ -18,7 +18,15 @@ export default function WhatsNewBlog() {
                   Some quick example text to build on the card title and make up
                   the bulk of the card's content.
                 </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
+                <Button
+                  style={{
+                    backgroundColor: "#bfa36f",
+                    borderColor: "transparent",
+                  }}
+                  variant="primary"
+                >
+                  Learn more
+                </Button>
               </Card.Body>
             </Card>
           </Col>

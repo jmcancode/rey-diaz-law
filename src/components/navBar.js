@@ -3,6 +3,7 @@ import logo from "../assets/Rey-Diaz-Logo-White.png";
 import { Image, Navbar, NavDropdown, Nav } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../Firebase/context";
+import { FiUser } from "react-icons/fi";
 
 export default function TopNav() {
   const history = useHistory();
@@ -48,7 +49,6 @@ export default function TopNav() {
               <NavDropdown.Item as={Link} to="/resources" href="#action/3.1">
                 Roadside Assistance
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Texas Laws</NavDropdown.Item>
               <NavDropdown.Item
                 as={Link}
                 to="/legalglossary"
@@ -68,7 +68,7 @@ export default function TopNav() {
           </Nav>
           <Nav>
             <Nav.Link as={Link} to="/myaccount">
-              My Account
+              <FiUser /> My Account
             </Nav.Link>
             {!currentUser && (
               <Nav.Link as={Link} to="/login" className="text-muted">

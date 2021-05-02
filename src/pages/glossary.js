@@ -5,9 +5,9 @@ export default function LegalGlossary() {
   return (
     <>
       <TopNav />
-      <Container className="pt-3 m-2">
+      <Container className="pt-3 m-2 p-4">
         <Row xs={1} md={1} lg={1} className="pt-2 pb-2">
-          <Col>
+          <Col className="text-center">
             <h2>Personal Injury Glossary</h2>
           </Col>
         </Row>
@@ -198,6 +198,25 @@ export default function LegalGlossary() {
             </p>
           </Col>
         </Row>
+        <Row className="w-100" xs={1} md={1} lg={1}>
+          <Col className="h-100">
+            <p className="text-muted text-center mt-3" style={{ fontSize: 10 }}>
+              San Antonio Website Design by
+              <a
+                target="__blank"
+                href="https://www.j12designs.com"
+                rel="noreferr noopener"
+                style={{
+                  textDecoration: "none",
+                  color: "#2f2f2f",
+                  paddingLeft: 3,
+                }}
+              >
+                J12 Designs
+              </a>{" "}
+            </p>
+          </Col>
+        </Row>{" "}
       </Container>
     </>
   );

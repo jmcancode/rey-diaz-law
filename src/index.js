@@ -6,6 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import "react-datetime/css/react-datetime.css";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 ReactDOM.render(
