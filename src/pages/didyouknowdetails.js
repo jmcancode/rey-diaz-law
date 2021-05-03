@@ -2,7 +2,19 @@ import React from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import TopNav from "../components/navBar";
 import featurePhoto from "../assets/adrian-n-FU4yhbdRAXU-unsplash.jpg";
-import { FiShare, FiPlus } from "react-icons/fi";
+
+import {
+  FacebookShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+  EmailShareButton,
+  EmailIcon,
+  FacebookIcon,
+} from "react-share";
+import { FiShare } from "react-icons/fi";
+
 export default function DidYouKnowDetail() {
   return (
     <>
@@ -53,17 +65,43 @@ export default function DidYouKnowDetail() {
         </Row>
       </Container>
       <Container className="h-10 text-center">
-        <Row className="pt-4 pb-3" xs={3} md={3} lg={3}>
-          <Col></Col>
+        <Row xs={1} md={1} lg={1}>
           <Col>
-            <p>
-              Share <FiShare />
-            </p>
+            Share <FiShare />
+          </Col>
+        </Row>
+        <Row className="pt-4 pb-4 mx-auto" xs={4} md={4} lg={4}>
+          <Col>
+            <TwitterShareButton
+              url={"https://twitter.com/reydiazlaw/"}
+              title="Did you know?!"
+              via="@reydiazlaw"
+              hashtags="#reydiazlaw #accident&injury #texaslaw"
+            >
+              <TwitterIcon round size={35} />
+            </TwitterShareButton>
           </Col>
           <Col>
-            <p>
-              Follow Us <FiPlus />
-            </p>
+            <FacebookShareButton
+              url={"https://www.facebook.com/ReyDiazLaw/"}
+              quote
+              hashtag={["#reydiazlaw", " #accident&injury"]}
+            >
+              <FacebookIcon round size={35} />
+            </FacebookShareButton>
+          </Col>
+          <Col>
+            <WhatsappShareButton title="Did you know?!">
+              <WhatsappIcon round size={35} />
+            </WhatsappShareButton>
+          </Col>
+          <Col>
+            <EmailShareButton
+              subject="Did you know from Rey Diaz Law"
+              body="Check this article out from Rey Diaz Law Firm!"
+            >
+              <EmailIcon round size={35} />
+            </EmailShareButton>
           </Col>
         </Row>
       </Container>
