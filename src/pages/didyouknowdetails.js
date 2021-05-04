@@ -75,8 +75,8 @@ export default function DidYouKnowDetail() {
             <TwitterShareButton
               url={"https://twitter.com/reydiazlaw/"}
               title="Did you know?!"
-              via="@reydiazlaw"
-              hashtags="#reydiazlaw #accident&injury #texaslaw"
+              via="reydiazlaw"
+              hashtags={["reydiazlaw #accidentinjury #attorney #texaslaw"]}
             >
               <TwitterIcon round size={35} />
             </TwitterShareButton>

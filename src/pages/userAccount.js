@@ -1,18 +1,36 @@
-import React from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Form,
-  Button,
-  FormGroup,
-} from "react-bootstrap";
+import React, { useState } from "react";
+import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import TopNav from "../components/navBar";
+
+import { Plus } from "react-bootstrap-icons";
+import DropZone from "react-dropzone";
+import { useDropzone } from "react-dropzone";
 
 import Avatar from "react-avatar";
 
+DropZone.autoDiscover = false;
+
 const UserAccount = () => {
+  const [files, setFile] = useState([]);
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: "image/*",
+    onDrop: (acceptedFiles) => {
+      setFile(
+        acceptedFiles.map((file) =>
+          Object.assign(file, { preview: URL.createObjectURL(file) })
+        )
+      );
+    },
+  });
+
+  const images = files.map((file) => (
+    <Row noGutters={true} xs={1} md={1} lg={1} key={file.name}>
+      <Col style={{ margin: 4 }}>
+        <img src={file.preview} style={{ width: "200px" }} alt="preview" />
+      </Col>
+    </Row>
+  ));
   return (
     <>
       <TopNav />
@@ -96,65 +114,30 @@ const UserAccount = () => {
       <Container className="pt-3">
         <Row xs={1} md={1} lg={1}>
           <Col>
-            <h5 className="ml-3">Your Documents</h5>
+            <Card {...getRootProps()} className="m-1 mt-3">
+              <Card.Body className="text-center">
+                <input {...getInputProps()} />
+                <Plus className="text-center text-muted" />
+                <p className="text-center text-muted">
+                  click or drag to add your files
+                </p>
+              </Card.Body>
+            </Card>
           </Col>
+          <Col>{images}</Col>
+        </Row>
+      </Container>
+      <Container>
+        <Row>
           <Col>
-            <Card className="p-3 m-3">
-              <Card.Body>
-                <p>This is where uploaded and downloaded doc will live</p>
+            <Card className="mt-3 m-1">
+              <Card.Body className="text-center text-muted">
+                user files will live here
               </Card.Body>
             </Card>
           </Col>
         </Row>
-      </Container>
-      <Container className="p-3">
-        <Row>
-          <Col>
-            <Card className="p-3 m-3">
-              <Card.Title className="ml-3">Payment Information</Card.Title>
-              <Form>
-                <FormGroup>
-                  <Col>
-                    <Form.Control
-                      className="mb-2"
-                      type="name"
-                      placeholder="Name on card"
-                    />
-                    <Form.Control
-                      className="mb-2"
-                      type="credit"
-                      placeholder="4242 4242 4242 4242"
-                    />
-                  </Col>
-                  <Col>
-                    <Form.Control
-                      className="mb-2"
-                      type="date"
-                      placeholder="MM/YY"
-                    />
-                    <Form.Control
-                      className="mb-2"
-                      type="number"
-                      placeholder="CVV"
-                    />
-                  </Col>
-                </FormGroup>
-                <Button
-                  variant="primary"
-                  type="submit"
-                  style={{
-                    backgroundColor: "#bfa36f",
-                    borderColor: "transparent",
-                  }}
-                  block
-                >
-                  Submit
-                </Button>
-              </Form>
-            </Card>
-          </Col>
-        </Row>
-        <Row className="w-100" xs={1} md={1} lg={1}>
+        <Row className="w-100 " xs={1} md={1} lg={1}>
           <Col className="h-100">
             <p className="text-muted text-center mt-3" style={{ fontSize: 10 }}>
               San Antonio Website Design by

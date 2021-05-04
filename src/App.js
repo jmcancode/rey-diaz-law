@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -17,7 +17,37 @@ import LegalGlossary from "./pages/glossary";
 import LegalResources from "./pages/resources";
 import WhatsNewBlog from "./pages/whatsnew";
 
+import firebase from "./Firebase/config";
+
 function App() {
+  if ("serviceWorkerRegistration" in navigator) {
+    navigator.serviceWorker
+      .register("firebase-messaging-sw.js")
+      .then(function (registration) {
+        console.log("[SW]: SCOPE: ", registration.scope);
+        return registration.scope;
+      })
+      .catch(function (err) {
+        return err;
+      });
+  }
+
+  useEffect(() => {
+    Notification.requestPermission()
+      .then(() =>
+        firebase.messaging.getToken({
+          vapidKey:
+            "BEg8-GcOGn9wNYlrBof6YXqMer3SWvrGCyQg0m4ySCCIRdC0XfCR4M1An6pGWZamXftGsPaB73sx8jvcGiEoDfk",
+        })
+      )
+      .then((currentToken) => {
+        console.log(currentToken); // save this token somewhere
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <AuthProvider>
       <Router>

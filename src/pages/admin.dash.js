@@ -297,7 +297,6 @@ export default function AdminDash() {
                   condensed
                   selectRow={{ mode: "checkbox" }}
                   tabIndexCell
-                  search
                   bordered={false}
                   keyField="id"
                   data={products}

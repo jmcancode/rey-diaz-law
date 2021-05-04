@@ -43,7 +43,7 @@ export default function TopNav() {
               Dashboard
             </Nav.Link>
             <Nav.Link as={Link} to="/inbox" href="#inbox">
-              Chat
+              Locations
             </Nav.Link>
             <NavDropdown title="Resouces" id="collasible-nav-dropdown">
               <NavDropdown.Item as={Link} to="/resources" href="#action/3.1">

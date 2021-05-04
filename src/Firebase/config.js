@@ -2,7 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/analytics";
 
-const app = firebase.initializeApp({
+const firebaseApp = firebase.initializeApp({
   apiKey: "AIzaSyAvnhJIWDkOttiS4c_aPy7v9krdEjJB0Z8",
   authDomain: "rey-di.firebaseapp.com",
   projectId: "rey-di",
@@ -12,6 +12,7 @@ const app = firebase.initializeApp({
   measurementId: "G-ECE5V7YVY3",
 });
 
-export const auth = app.auth();
-export const analytics = firebase.analytics();
-export default app;
+export const auth = firebase.auth();
+export const analytics = firebase.analytics().logEvent("notification_received");
+export const provider = new firebase.auth.GoogleAuthProvider();
+export default firebaseApp;

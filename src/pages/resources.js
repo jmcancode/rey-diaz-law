@@ -1,11 +1,11 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Accordion, Card } from "react-bootstrap";
 import TopNav from "../components/navBar";
 export default function LegalResources() {
   return (
     <>
       <TopNav />
-      <Container className="pt-3 m-2 p-4">
+      <Container className="pt-3 p-4">
         <Row xs={1} md={1} lg={1} className="pt-2 pb-2">
           <Col className="text-center">
             <h2>Roadside Assistance</h2>
@@ -13,52 +13,76 @@ export default function LegalResources() {
         </Row>
         <Row xs={1} md={1} lg={1}>
           <Col>
-            <h5>Resource #1</h5>
-          </Col>
-          <Col>
-            <p className="text-left">
-              The statute of limitations is essentially how long you have to
-              file an injury claim against the at-fault person, business, or
-              insurance company. For example, the state of Texas has a statute
-              of limitations of three (3) years on most injury claims.
-            </p>
-            <p>210-754-1245</p>
-          </Col>
-          <Col>
-            <h5>Resource #2</h5>
-          </Col>
-          <Col>
-            <p className="text-left">
-              The statute of limitations is essentially how long you have to
-              file an injury claim against the at-fault person, business, or
-              insurance company. For example, the state of Texas has a statute
-              of limitations of three (3) years on most injury claims.
-            </p>
-            <p>210-754-1245</p>
-          </Col>
-          <Col>
-            <h5>Resource #3</h5>
-          </Col>
-          <Col>
-            <p className="text-left">
-              The statute of limitations is essentially how long you have to
-              file an injury claim against the at-fault person, business, or
-              insurance company. For example, the state of Texas has a statute
-              of limitations of three (3) years on most injury claims.
-            </p>
-            <p>210-754-1245</p>
-          </Col>
-          <Col>
-            <h5>Resource #4</h5>
-          </Col>
-          <Col>
-            <p className="text-left">
-              The statute of limitations is essentially how long you have to
-              file an injury claim against the at-fault person, business, or
-              insurance company. For example, the state of Texas has a statute
-              of limitations of three (3) years on most injury claims.
-            </p>
-            <p>210-754-1245</p>
+            <Accordion defaultActiveKey="0">
+              <Card>
+                <Accordion.Toggle as={Card.Header} eventKey="0">
+                  Resource #1
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey="0">
+                  <Card.Body>
+                    The statute of limitations is essentially how long you have
+                    to file an injury claim against the at-fault person,
+                    business, or insurance company. For example, the state of
+                    Texas has a statute of limitations of three (3) years on
+                    most injury claims.
+                    <br />
+                    <br />
+                    <a href="tel: +12101231154">(210) 123-456</a>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+              <Card>
+                <Accordion.Toggle as={Card.Header} eventKey="1">
+                  Resource #2
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey="1">
+                  <Card.Body>
+                    The statute of limitations is essentially how long you have
+                    to file an injury claim against the at-fault person,
+                    business, or insurance company. For example, the state of
+                    Texas has a statute of limitations of three (3) years on
+                    most injury claims.
+                    <br />
+                    <br />
+                    <a href="tel: +12101231154">(210) 123-456</a>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+              <Card>
+                <Accordion.Toggle as={Card.Header} eventKey="2">
+                  Resource #2
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey="2">
+                  <Card.Body>
+                    The statute of limitations is essentially how long you have
+                    to file an injury claim against the at-fault person,
+                    business, or insurance company. For example, the state of
+                    Texas has a statute of limitations of three (3) years on
+                    most injury claims.
+                    <br />
+                    <br />
+                    <a href="tel: +12101231154">(210) 123-456</a>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+              <Card>
+                <Accordion.Toggle as={Card.Header} eventKey="3">
+                  Resource #3
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey="3">
+                  <Card.Body>
+                    The statute of limitations is essentially how long you have
+                    to file an injury claim against the at-fault person,
+                    business, or insurance company. For example, the state of
+                    Texas has a statute of limitations of three (3) years on
+                    most injury claims.
+                    <br />
+                    <br />
+                    <a href="tel: +12101231154">(210) 123-456</a>
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Card>
+            </Accordion>
           </Col>
         </Row>
         <Row className="w-100" xs={1} md={1} lg={1}>

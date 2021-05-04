@@ -10,7 +10,7 @@ export default function WhatsNewBlog() {
       <Container fluid className="w-100 h-100 pt-3">
         <Row xs={1} md={1} lg={1}>
           <Col>
-            <Card >
+            <Card>
               <Card.Img variant="top" src={featurephoto} />
               <Card.Body>
                 <Card.Title>Whats new</Card.Title>

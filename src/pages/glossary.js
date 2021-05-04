@@ -5,7 +5,7 @@ export default function LegalGlossary() {
   return (
     <>
       <TopNav />
-      <Container className="pt-3 m-2 p-4">
+      <Container className="pt-3 p-4">
         <Row xs={1} md={1} lg={1} className="pt-2 pb-2">
           <Col className="text-center">
             <h2>Personal Injury Glossary</h2>
