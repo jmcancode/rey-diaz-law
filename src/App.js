@@ -59,10 +59,10 @@ function App() {
             <Route path="/myaccount" component={UserAccount} />
             <Route path="/admin" component={AdminDash} />
             <PrivateRoute exact path="/" component={Dashboard} />
-            <PrivateRoute path="/didyouknow" component={DidYouKnowDetail} />
+            <PrivateRoute path="/didyouknow/:id" component={DidYouKnowDetail} />
             <PrivateRoute path="/legalglossary" component={LegalGlossary} />
             <PrivateRoute path="/resources" component={LegalResources} />
-            <PrivateRoute path="/whatsnew" component={WhatsNewBlog} />
+            <PrivateRoute path="/whatsnew/:id" component={WhatsNewBlog} />
           </Switch>
         </div>
       </Router>

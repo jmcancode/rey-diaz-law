@@ -27,7 +27,9 @@ export default function LegalResources() {
                     most injury claims.
                     <br />
                     <br />
-                    <a href="tel: +12101231154">(210) 123-456</a>
+                    <a style={{ color: "#c02626" }} href="tel: +12101231154">
+                      (210) 123-456
+                    </a>
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
@@ -44,7 +46,9 @@ export default function LegalResources() {
                     most injury claims.
                     <br />
                     <br />
-                    <a href="tel: +12101231154">(210) 123-456</a>
+                    <a style={{ color: "#c02626" }} href="tel: +12101231154">
+                      (210) 123-456
+                    </a>
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
@@ -61,7 +65,9 @@ export default function LegalResources() {
                     most injury claims.
                     <br />
                     <br />
-                    <a href="tel: +12101231154">(210) 123-456</a>
+                    <a style={{ color: "#c02626" }} href="tel: +12101231154">
+                      (210) 123-456
+                    </a>
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>
@@ -78,7 +84,9 @@ export default function LegalResources() {
                     most injury claims.
                     <br />
                     <br />
-                    <a href="tel: +12101231154">(210) 123-456</a>
+                    <a style={{ color: "#c02626" }} href="tel: +12101231154">
+                      (210) 123-456
+                    </a>
                   </Card.Body>
                 </Accordion.Collapse>
               </Card>

@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/analytics";
+import "firebase/firestore";
 
 const firebaseApp = firebase.initializeApp({
   apiKey: "AIzaSyAvnhJIWDkOttiS4c_aPy7v9krdEjJB0Z8",
@@ -13,6 +14,7 @@ const firebaseApp = firebase.initializeApp({
 });
 
 export const auth = firebase.auth();
+export const db = firebaseApp.firestore();
 export const analytics = firebase.analytics().logEvent("notification_received");
 export const provider = new firebase.auth.GoogleAuthProvider();
 export default firebaseApp;

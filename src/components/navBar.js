@@ -3,7 +3,6 @@ import logo from "../assets/Rey-Diaz-Logo-White.png";
 import { Image, Navbar, NavDropdown, Nav } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../Firebase/context";
-import { FiUser } from "react-icons/fi";
 
 export default function TopNav() {
   const history = useHistory();
@@ -68,7 +67,7 @@ export default function TopNav() {
           </Nav>
           <Nav>
             <Nav.Link as={Link} to="/myaccount">
-              <FiUser /> My Account
+              My Account
             </Nav.Link>
             {!currentUser && (
               <Nav.Link as={Link} to="/login" className="text-muted">

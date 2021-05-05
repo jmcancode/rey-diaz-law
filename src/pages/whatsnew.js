@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Card, Button } from "react-bootstrap";
 import featurephoto from "../assets/tingey-injury-law-firm-yCdPU73kGSc-unsplash.jpg";
 import TopNav from "../components/navBar";
 
+import { db } from "../Firebase/config";
+
 export default function WhatsNewBlog() {
+  const [whatsNew, setWhatsNew] = useState("");
+
+  useEffect(() => {
+    db.collection("whatsNew").onSnapshot((snapshot) =>
+      setWhatsNew(snapshot.docs.map((doc) => doc.data()))
+    );
+  }, []);
+
   return (
     <>
       <TopNav />
@@ -13,11 +23,12 @@ export default function WhatsNewBlog() {
             <Card>
               <Card.Img variant="top" src={featurephoto} />
               <Card.Body>
-                <Card.Title>Whats new</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
+                {whatsNew.map(({ blogTitle }) => (
+                  <Card.Title blogTitle={blogTitle}>{blogTitle}</Card.Title>
+                ))}
+                {whatsNew.map(({ blogContent }) => (
+                  <Card.Text blogContent={blogContent}>{blogContent}</Card.Text>
+                ))}
                 <Button
                   style={{
                     backgroundColor: "#bfa36f",

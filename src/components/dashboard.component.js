@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import TopNav from "../components/navBar";
 
@@ -6,24 +6,33 @@ import Datetime from "react-datetime";
 
 import dykphoto from "../assets/adrian-n-FU4yhbdRAXU-unsplash.jpg";
 import newsphoto from "../assets/tingey-injury-law-firm-yCdPU73kGSc-unsplash.jpg";
+import freephoto from "../assets/helena-lopes-2ozURDBsxqc-unsplash.jpg";
 import { Link } from "react-router-dom";
 
 import InstagramEmbed from "react-instagram-embed";
+import { db } from "../Firebase/config";
 
 export default function Dashboard() {
+  const [whatsNew, setWhatsNew] = useState([]);
+
+  useEffect(() => {
+    db.collection("whatsNew").onSnapshot((snapshot) =>
+      setWhatsNew(snapshot.docs.map((doc) => doc.data()))
+    );
+  }, []);
+
   return (
     <>
       <TopNav />
       <Container className="h-100 mt-3">
         <Row xs={1} md={3} lg={3}>
           <Col className="p-1">
-            <Card className="h-100 p-3">
+            <Card className="h-100 ">
               <Card.Img variant="top" src={dykphoto} />
               <Card.Body>
                 <Card.Title>Did you know?</Card.Title>
                 <Card.Text className="text-left">
-                  The blog that keeps you informed. Learn more and share with
-                  your network.
+                  Learn more and share with your network.
                 </Card.Text>
                 <Link to="/didyouknow" style={{ color: "#bfa36f" }}>
                   Read More
@@ -33,18 +42,15 @@ export default function Dashboard() {
           </Col>
           <Col className="p-1 h-100">
             <Card>
-              <Card.Img
-                className="p-3"
-                variant="top"
-                src={newsphoto}
-                alt="glossary-header"
-              />
+              <Card.Img variant="top" src={newsphoto} alt="glossary-header" />
               <Card.Body>
-                <Card.Title>Whats new</Card.Title>
-                <Card.Text>
-                  General knowledge from the firm. A daily, weekly, bi-annual
-                  post.
-                </Card.Text>
+                {whatsNew.map(({ blogTitle}) => (
+                  <Card.Title blogTitle={blogTitle}>{blogTitle}</Card.Title>
+                ))}
+                {whatsNew.map(({ blogContent }) => (
+                  <Card.Text>{blogContent}</Card.Text>
+                ))}
+
                 <Link to="/whatsnew" style={{ color: "#bfa36f" }}>
                   Read more
                 </Link>
@@ -53,12 +59,7 @@ export default function Dashboard() {
           </Col>
           <Col className="p-1 h-100">
             <Card>
-              <Card.Img
-                className="p-3"
-                variant="top"
-                src={newsphoto}
-                alt="glossary-header"
-              />
+              <Card.Img variant="top" src={freephoto} alt="glossary-header" />
               <Card.Body>
                 <Card.Title>Free Information</Card.Title>
                 <Card.Text>
@@ -72,23 +73,6 @@ export default function Dashboard() {
             </Card>
           </Col>
         </Row>
-        <Row xs={1} md={1} lg={1}>
-          <div>
-            <InstagramEmbed
-              url="https://www.instagram.com/explore/locations/306522226161723/reynaldo-l-diaz-jr-pc-accident-injury-attorney/"
-              clientAccessToken="306522226161723"
-              maxWidth={320}
-              hideCaption={false}
-              containerTagName="div"
-              protocol=""
-              injectScript
-              onLoading={() => {}}
-              onSuccess={() => {}}
-              onAfterRender={() => {}}
-              onFailure={() => {}}
-            />
-          </div>
-        </Row>
         <Row noGutters={true} className="pt-3" xs={1} md={1} lg={1}>
           <Col className="pt-4">
             <h5>Request an appointment</h5>
@@ -99,6 +83,27 @@ export default function Dashboard() {
               timeFormat={true}
               value={new Date()}
             />
+          </Col>
+        </Row>
+        <Row xs={1} md={1} lg={1}>
+          <Col>
+            <Card className="h-50">
+              <div>
+                <InstagramEmbed
+                  url="https://www.instagram.com/reynaldo-l-diaz-jr-pc-accident-injury-attorney/"
+                  clientAccessToken="306522226161723"
+                  maxWidth={320}
+                  hideCaption={false}
+                  containerTagName="div"
+                  protocol=""
+                  injectScript
+                  onLoading={() => {}}
+                  onSuccess={() => {}}
+                  onAfterRender={() => {}}
+                  onFailure={() => {}}
+                />
+              </div>
+            </Card>
           </Col>
         </Row>
         <Row className="w-100" xs={1} md={1} lg={1}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import TopNav from "../components/navBar";
 
@@ -6,12 +6,69 @@ import { Plus } from "react-bootstrap-icons";
 import DropZone from "react-dropzone";
 import { useDropzone } from "react-dropzone";
 
+import { db } from "../Firebase/config";
+import { useAuth } from "../Firebase/context";
 import Avatar from "react-avatar";
 
 DropZone.autoDiscover = false;
 
-const UserAccount = () => {
+export default function UserAccount() {
   const [files, setFile] = useState([]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressTwo, setAddressTwo] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
+  const [image, setImage] = useState("");
+  const [loader, setLoader] = useState("");
+  const { currentUser } = useAuth();
+  const [users, setUsers] = useState([]);
+
+  const handleUserSumbit = (e) => {
+    e.preventDefault();
+    setLoader(true);
+
+    db.collection("users")
+      .add({
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        address: address,
+        addressTwo: addressTwo,
+        city: city,
+        state: state,
+        zip: zip,
+        image: image,
+      })
+      .then(() => {
+        setLoader(false);
+        alert("Your account was successfully set up. Welcome!");
+      })
+      .catch((error) => {
+        alert(error.message);
+        setLoader(false);
+      });
+    setEmail("");
+    setPassword("");
+    setFirstName("");
+    setLastName("");
+    setAddress("");
+    setCity("");
+    setState("");
+    setZip("");
+    setImage("");
+  };
+
+  useEffect(() => {
+    db.collection("users").onSnapshot((snapshot) =>
+      setUsers(snapshot.docs.map((doc) => doc.data()))
+    );
+  }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -31,6 +88,7 @@ const UserAccount = () => {
       </Col>
     </Row>
   ));
+
   return (
     <>
       <TopNav />
@@ -42,63 +100,117 @@ const UserAccount = () => {
             </Col>
           </Row>
           <Row className="pt-2" xs={1} md={1} lg={1}>
+            <Col className="text-center">{!currentUser && <p>Welcome</p>}</Col>
             <Col className="text-center">
-              <p>Jon-Michael Narvaez</p>
+              {users.map(({ firstName }) => (
+                <p firstName={firstName}>Hey, {firstName}</p>
+              ))}
             </Col>
           </Row>
           <Row>
             <Col>
-              <Form>
+              <Form onSubmit={handleUserSumbit}>
                 <Form.Row>
                   <Form.Group as={Col} controlId="formGridEmail">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
+                    <Form.Control
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      type="email"
+                      placeholder="Enter email"
+                    />
                   </Form.Group>
 
                   <Form.Group as={Col} controlId="formGridPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Control
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      type="password"
+                      placeholder="Password"
+                    />
                   </Form.Group>
                 </Form.Row>
 
                 <Form.Group controlId="formGridAddress1">
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    
+                  />
+                </Form.Group>
+                <Form.Group controlId="formGridAddress1">
+                  <Form.Label>Last Name</Form.Label>
+                  <Form.Control
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="formGridAddress1">
                   <Form.Label>Address</Form.Label>
-                  <Form.Control placeholder="1234 Main St" />
+                  <Form.Control
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder="1234 Main St"
+                  />
                 </Form.Group>
 
                 <Form.Group controlId="formGridAddress2">
                   <Form.Label>Address 2</Form.Label>
-                  <Form.Control placeholder="Apartment, studio, or floor" />
+                  <Form.Control
+                    value={addressTwo}
+                    onChange={(e) => setAddressTwo(e.target.value)}
+                    placeholder="Apartment, studio, or floor"
+                  />
                 </Form.Group>
 
                 <Form.Row>
                   <Form.Group as={Col} controlId="formGridCity">
                     <Form.Label>City</Form.Label>
-                    <Form.Control />
+                    <Form.Control
+                      placeholder="San Antonio"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                    />
                   </Form.Group>
 
                   <Form.Group as={Col} controlId="formGridState">
                     <Form.Label>State</Form.Label>
-                    <Form.Control as="select" defaultValue="Choose...">
+                    <Form.Control
+                      value={state}
+                      onChange={(e) => setState(e.target.value)}
+                      as="select"
+                      defaultValue="Choose..."
+                    >
                       <option>Choose...</option>
-                      <option>...</option>
+                      <option>Texas</option>
                     </Form.Control>
                   </Form.Group>
 
                   <Form.Group as={Col} controlId="formGridZip">
                     <Form.Label>Zip</Form.Label>
-                    <Form.Control />
+                    <Form.Control
+                      value={zip}
+                      onChange={(e) => setZip(e.target.value)}
+                      placeholder="78205"
+                    />
                   </Form.Group>
                 </Form.Row>
 
                 <Form.Group>
-                  <Form.File id="exampleFormControlFile1" label="" />
+                  <Form.File
+                    id="exampleFormControlFile1"
+                    label="Drivers Licence"
+                  />
                 </Form.Group>
 
                 <Button
                   block
                   style={{
-                    backgroundColor: "#bfa36f",
+                    backgroundColor: loader ? "#c02626" : "#bfa36f",
                     borderColor: "transparent",
                   }}
                   variant="primary"
@@ -159,6 +271,4 @@ const UserAccount = () => {
       </Container>
     </>
   );
-};
-
-export default UserAccount;
+}
