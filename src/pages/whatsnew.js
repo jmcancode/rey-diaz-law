@@ -24,10 +24,10 @@ export default function WhatsNewBlog() {
               <Card.Img variant="top" src={featurephoto} />
               <Card.Body>
                 {whatsNew.map(({ blogTitle }) => (
-                  <Card.Title blogTitle={blogTitle}>{blogTitle}</Card.Title>
+                  <Card.Title>{blogTitle}</Card.Title>
                 ))}
                 {whatsNew.map(({ blogContent }) => (
-                  <Card.Text blogContent={blogContent}>{blogContent}</Card.Text>
+                  <Card.Text>{blogContent}</Card.Text>
                 ))}
                 <Button
                   style={{

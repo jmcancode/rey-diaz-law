@@ -12,23 +12,22 @@ import {
 import { FiPlus } from "react-icons/fi";
 
 import FullCalendar from "@fullcalendar/react";
-// import dayGridPlugin from "@fullcalendar/daygrid";
-// import listPlugin from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 
 import TopNav from "../components/navBar";
 
 import BootstrapTable from "react-bootstrap-table-next";
-import cellEditFactory from "react-bootstrap-table2-editor";
-import paginationFactory from "react-bootstrap-table2-paginator";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+// import cellEditFactory from "react-bootstrap-table2-editor";
+// import paginationFactory from "react-bootstrap-table2-paginator";
 
 import { db } from "../Firebase/config";
 
 const handleDateClick = (arg) => {
   alert(arg.dateStr);
 };
-
+const { SearchBar } = Search;
 const products = [
   {
     id: "1",
@@ -304,9 +303,7 @@ function MyVerticallyCenteredModalTwo(props) {
               backgroundColor: loader ? "#c02626" : "#bfa36f",
               borderColor: "transparent",
             }}
-            
             type="submit"
-            
           >
             Submit
           </Button>
@@ -318,10 +315,11 @@ function MyVerticallyCenteredModalTwo(props) {
 
 export default function AdminDash() {
   const [modalShow, setModalShow] = useState(false);
+
   return (
     <>
       <TopNav />
-      <Container fluid className="h-100 mt-1 mb-5">
+      <Container fluid className="h-100 mt-1 mb-3">
         <Row className="pt-3" xs={1} md={2} lg={2}>
           <Col>
             <Card>
@@ -347,7 +345,7 @@ export default function AdminDash() {
             </Card>
           </Col>
           <Col>
-            <Card className="mt-2">
+            <Card className="">
               <Card.Body className="text-center text-uppercase">
                 <h5>Whats New</h5>
                 <Button
@@ -374,55 +372,28 @@ export default function AdminDash() {
           <Col>
             <Card>
               <Card.Body>
-                <BootstrapTable
-                  striped
-                  hover={true}
-                  condensed={true}
-                  tabIndexCell
-                  bordered={false}
+                <ToolkitProvider
                   keyField="id"
-                  sort={{ dataField: "location", order: "asc" }}
                   data={products}
                   columns={columns}
-                  cellEdit={cellEditFactory({
-                    mode: "click",
-                    blurToSave: true,
-                  })}
-                  pagination={paginationFactory({
-                    page: 2, // Specify the current page. It's necessary when remote is enabled
-                    sizePerPage: 5, // Specify the size per page. It's necessary when remote is enabled
-                    totalSize: 100, // Total data size. It's necessary when remote is enabled
-                    pageStartIndex: 0, // first page will be 0, default is 1
-                    paginationSize: 3, // the pagination bar size, default is 5
-                    showTotal: true, // display pagination information
-                    sizePerPageList: [
-                      {
-                        text: "5",
-                        value: 5,
-                      },
-                      {
-                        text: "10",
-                        value: 10,
-                      },
-                      {
-                        text: "All",
-                        value: products.length,
-                      },
-                    ], // A numeric array is also available: [5, 10]. the purpose of above example is custom the text
-                    withFirstAndLast: false, // hide the going to first and last page button
-                    alwaysShowAllBtns: true, // always show the next and previous page button
-                    firstPageText: "First", // the text of first page button
-                    prePageText: "Prev", // the text of previous page button
-                    nextPageText: "Next", // the text of next page button
-                    lastPageText: "Last", // the text of last page button
-                    nextPageTitle: "Go to next", // the title of next page button
-                    prePageTitle: "Go to previous", // the title of previous page button
-                    firstPageTitle: "Go to first", // the title of first page button
-                    lastPageTitle: "Go to last", // the title of last page button
-                    hideSizePerPage: true, // hide the size per page dropdown
-                    hidePageListOnlyOnePage: true, // hide pagination bar when only one page, default is false
-                  })}
-                />
+                  search
+                >
+                  {(props) => (
+                    <div>
+                      <SearchBar
+                        style={{
+                          borderRightColor: "transparent",
+                          borderTopColor: "transparent",
+                          borderLeftColor: "transparent",
+                          backgroundColor: "transparent",
+                        }}
+                        {...props.searchProps}
+                      />
+                      <hr />
+                      <BootstrapTable {...props.baseProps} />
+                    </div>
+                  )}
+                </ToolkitProvider>
               </Card.Body>
             </Card>
           </Col>

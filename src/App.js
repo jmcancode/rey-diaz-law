@@ -41,7 +41,7 @@ function App() {
         })
       )
       .then((currentToken) => {
-        console.log(currentToken); // save this token somewhere
+        console.log(currentToken);
       })
       .catch((err) => {
         console.log(err);
@@ -59,10 +59,10 @@ function App() {
             <Route path="/myaccount" component={UserAccount} />
             <Route path="/admin" component={AdminDash} />
             <PrivateRoute exact path="/" component={Dashboard} />
-            <PrivateRoute path="/didyouknow/:id" component={DidYouKnowDetail} />
+            <PrivateRoute path="/didyouknow" component={DidYouKnowDetail} />
             <PrivateRoute path="/legalglossary" component={LegalGlossary} />
             <PrivateRoute path="/resources" component={LegalResources} />
-            <PrivateRoute path="/whatsnew/:id" component={WhatsNewBlog} />
+            <PrivateRoute path="/whatsnew" component={WhatsNewBlog} />
           </Switch>
         </div>
       </Router>

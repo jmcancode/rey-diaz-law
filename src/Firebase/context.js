@@ -41,7 +41,6 @@ export function AuthProvider({ children }) {
       console.log(user);
       setLoading(false);
     });
-
     return unsubscribe;
   }, []);
 

@@ -44,8 +44,8 @@ export default function Dashboard() {
             <Card>
               <Card.Img variant="top" src={newsphoto} alt="glossary-header" />
               <Card.Body>
-                {whatsNew.map(({ blogTitle}) => (
-                  <Card.Title blogTitle={blogTitle}>{blogTitle}</Card.Title>
+                {whatsNew.map(({ blogTitle }) => (
+                  <Card.Title>{blogTitle}</Card.Title>
                 ))}
                 {whatsNew.map(({ blogContent }) => (
                   <Card.Text>{blogContent}</Card.Text>

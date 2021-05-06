@@ -10,8 +10,6 @@ import { db } from "../Firebase/config";
 import { useAuth } from "../Firebase/context";
 import Avatar from "react-avatar";
 
-DropZone.autoDiscover = false;
-
 export default function UserAccount() {
   const [files, setFile] = useState([]);
   const [email, setEmail] = useState("");
@@ -23,12 +21,12 @@ export default function UserAccount() {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
-  const [image, setImage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [loader, setLoader] = useState("");
   const { currentUser } = useAuth();
   const [users, setUsers] = useState([]);
 
-  const handleUserSumbit = (e) => {
+  const handleUserSubmit = (e) => {
     e.preventDefault();
     setLoader(true);
 
@@ -43,7 +41,7 @@ export default function UserAccount() {
         city: city,
         state: state,
         zip: zip,
-        image: image,
+        imageUrl: imageUrl,
       })
       .then(() => {
         setLoader(false);
@@ -61,7 +59,7 @@ export default function UserAccount() {
     setCity("");
     setState("");
     setZip("");
-    setImage("");
+    setImageUrl("");
   };
 
   useEffect(() => {
@@ -71,7 +69,7 @@ export default function UserAccount() {
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
-    accept: "image/*",
+    accept: () => "image/*",
     onDrop: (acceptedFiles) => {
       setFile(
         acceptedFiles.map((file) =>
@@ -89,6 +87,8 @@ export default function UserAccount() {
     </Row>
   ));
 
+  DropZone.autoDiscover = false;
+
   return (
     <>
       <TopNav />
@@ -96,20 +96,22 @@ export default function UserAccount() {
         <Card className="p-3 m-3">
           <Row xs={1} md={1} lg={1}>
             <Col className="text-center">
-              <Avatar name="Jon-Michael Narvaez" round={true} />
+              {users.map(({ imageUrl }) => (
+                <Avatar src={imageUrl} round={true} />
+              ))}
             </Col>
           </Row>
           <Row className="pt-2" xs={1} md={1} lg={1}>
             <Col className="text-center">{!currentUser && <p>Welcome</p>}</Col>
-            <Col className="text-center">
+            <Col className="m-1 pb-4">
               {users.map(({ firstName }) => (
-                <p firstName={firstName}>Hey, {firstName}</p>
+                <p className="text-center">Welcome back, {firstName}</p>
               ))}
             </Col>
           </Row>
           <Row>
             <Col>
-              <Form onSubmit={handleUserSumbit}>
+              <Form onSubmit={handleUserSubmit}>
                 <Form.Row>
                   <Form.Group as={Col} controlId="formGridEmail">
                     <Form.Label>Email</Form.Label>
@@ -137,7 +139,6 @@ export default function UserAccount() {
                   <Form.Control
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    
                   />
                 </Form.Group>
                 <Form.Group controlId="formGridAddress1">
@@ -145,7 +146,6 @@ export default function UserAccount() {
                   <Form.Control
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    
                   />
                 </Form.Group>
 
@@ -183,7 +183,6 @@ export default function UserAccount() {
                       value={state}
                       onChange={(e) => setState(e.target.value)}
                       as="select"
-                      defaultValue="Choose..."
                     >
                       <option>Choose...</option>
                       <option>Texas</option>
@@ -204,6 +203,8 @@ export default function UserAccount() {
                   <Form.File
                     id="exampleFormControlFile1"
                     label="Drivers Licence"
+                    value={imageUrl}
+                    onChange={(e) => setImageUrl(e.target.value)}
                   />
                 </Form.Group>
 
@@ -236,7 +237,6 @@ export default function UserAccount() {
               </Card.Body>
             </Card>
           </Col>
-          <Col>{images}</Col>
         </Row>
       </Container>
       <Container>
@@ -244,7 +244,7 @@ export default function UserAccount() {
           <Col>
             <Card className="mt-3 m-1">
               <Card.Body className="text-center text-muted">
-                user files will live here
+                <Col>{images}</Col>
               </Card.Body>
             </Card>
           </Col>

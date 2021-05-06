@@ -16,7 +16,7 @@ import TopNav from "../components/navBar";
 const UserInbox = () => {
   const [email, setEmail] = useState("");
   const [loader, setLoader] = useState("");
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoader(true);
@@ -81,7 +81,7 @@ const UserInbox = () => {
               <Card.Body>
                 <Card.Title>San Antonio</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
-                  <a style={{ color: "#c02626" }} href="tel:+12102241000">
+                  <a style={{ color: "#bfa36f" }} href="tel:+12102241000">
                     (210) 224-1000
                   </a>
                 </Card.Subtitle>
@@ -96,7 +96,7 @@ const UserInbox = () => {
               <Card.Body>
                 <Card.Title>Austin</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
-                  <a style={{ color: "#c02626" }} href="tel:+15124481000">
+                  <a style={{ color: "#bfa36f" }} href="tel:+15124481000">
                     (512) 448-1000
                   </a>
                 </Card.Subtitle>
@@ -113,7 +113,7 @@ const UserInbox = () => {
               <Card.Body>
                 <Card.Title>Edinburg</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
-                  <a style={{ color: "#c02626" }} href="tel:+19563161000">
+                  <a style={{ color: "#bfa36f" }} href="tel:+19563161000">
                     (956) 316-1000
                   </a>
                 </Card.Subtitle>
@@ -128,7 +128,7 @@ const UserInbox = () => {
               <Card.Body>
                 <Card.Title>Laredo</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
-                  <a style={{ color: "#c02626" }} href="tel:+19567951000">
+                  <a style={{ color: "#bfa36f" }} href="tel:+19567951000">
                     (956)795-1000
                   </a>
                 </Card.Subtitle>
@@ -142,54 +142,51 @@ const UserInbox = () => {
             <Card className="mb-2">
               <Accordion defaultActiveKey="0">
                 <Card>
-                  <Card.Header>
-                    <Accordion.Toggle
-                      as={Button}
-                      variant="outlined"
-                      eventKey="0"
-                    >
-                      Toll Free
-                    </Accordion.Toggle>
-                  </Card.Header>
+                  <Accordion.Toggle
+                    as={Card.Header}
+                    variant="outlined"
+                    eventKey="0"
+                  >
+                    Toll Free
+                  </Accordion.Toggle>
+
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
-                      <a style={{ color: "#c02626" }} href="tel:+18002440001">
+                      <a style={{ color: "#bfa36f" }} href="tel:+18002440001">
                         (800) 224-001
                       </a>
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
                 <Card>
-                  <Card.Header>
-                    <Accordion.Toggle
-                      as={Button}
-                      variant="outlined"
-                      eventKey="1"
-                    >
-                      Fax
-                    </Accordion.Toggle>
-                  </Card.Header>
+                  <Accordion.Toggle
+                    as={Card.Header}
+                    variant="outlined"
+                    eventKey="1"
+                  >
+                    Fax
+                  </Accordion.Toggle>
+
                   <Accordion.Collapse eventKey="1">
                     <Card.Body>
-                      <a style={{ color: "#c02626" }} href="tel:+12102241030">
+                      <a style={{ color: "#bfa36f" }} href="tel:+12102241030">
                         (210) 224-130{" "}
                       </a>
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
                 <Card>
-                  <Card.Header>
-                    <Accordion.Toggle
-                      as={Button}
-                      variant="outlined"
-                      eventKey="2"
-                    >
-                      Text
-                    </Accordion.Toggle>
-                  </Card.Header>
+                  <Accordion.Toggle
+                    as={Card.Header}
+                    variant="outlined"
+                    eventKey="2"
+                  >
+                    Text
+                  </Accordion.Toggle>
+
                   <Accordion.Collapse eventKey="2">
                     <Card.Body>
-                      <a style={{ color: "#c02626" }} href="tel:+12102242000">
+                      <a style={{ color: "#bfa36f" }} href="tel:+12102242000">
                         (210) 224-2000
                       </a>
                     </Card.Body>
