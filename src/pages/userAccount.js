@@ -1,17 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import TopNav from "../components/navBar";
 
 import { Plus } from "react-bootstrap-icons";
-import DropZone from "react-dropzone";
 import { useDropzone } from "react-dropzone";
 
 import { db } from "../Firebase/config";
 import { useAuth } from "../Firebase/context";
 import Avatar from "react-avatar";
 
+const baseStyle = {
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  padding: "20px",
+  borderWidth: 2,
+  borderRadius: 2,
+  borderColor: "#eeeeee",
+  borderStyle: "dashed",
+  backgroundColor: "#fafafa",
+  color: "#bdbdbd",
+  outline: "none",
+  transition: "border .24s ease-in-out",
+};
+
+const activeStyle = {
+  borderColor: "#2196f3",
+};
+
+const acceptStyle = {
+  borderColor: "#00e676",
+};
+
+const rejectStyle = {
+  borderColor: "#ff1744",
+};
+
 export default function UserAccount() {
-  const [files, setFile] = useState([]);
+  const [files, setFiles] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -68,32 +95,57 @@ export default function UserAccount() {
     );
   }, []);
 
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: () => "image/*",
+  const {
+    getRootProps,
+    getInputProps,
+    isDragActive,
+    isDragAccept,
+    isDragReject,
+    acceptedFiles,
+    open,
+  } = useDropzone({
+    accept: ".doc, .pdf",
+    noClick: true,
+    noKeyboard: true,
     onDrop: (acceptedFiles) => {
-      setFile(
+      setFiles(
         acceptedFiles.map((file) =>
-          Object.assign(file, { preview: URL.createObjectURL(file) })
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
         )
       );
     },
   });
 
-  const images = files.map((file) => (
-    <Row noGutters={true} xs={1} md={1} lg={1} key={file.name}>
-      <Col style={{ margin: 4 }}>
-        <img src={file.preview} style={{ width: "200px" }} alt="preview" />
-      </Col>
-    </Row>
+  const style = useMemo(
+    () => ({
+      ...baseStyle,
+      ...(isDragActive ? activeStyle : {}),
+      ...(isDragAccept ? acceptStyle : {}),
+      ...(isDragReject ? rejectStyle : {}),
+    }),
+    [isDragActive, isDragReject, isDragAccept]
+  );
+
+  useEffect(
+    () => () => {
+      // Make sure to revoke the data uris to avoid memory leaks
+      files.forEach((file) => URL.revokeObjectURL(file.preview));
+    },
+    [files]
+  );
+
+  const filepath = acceptedFiles.map((file) => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
   ));
-
-  DropZone.autoDiscover = false;
-
   return (
     <>
       <TopNav />
       <Container className="pt-3">
-        <Card className="p-3 m-3">
+        <Card key={users.doc} className="p-3 m-3">
           <Row xs={1} md={1} lg={1}>
             <Col className="text-center">
               {users.map(({ imageUrl }) => (
@@ -227,12 +279,12 @@ export default function UserAccount() {
       <Container className="pt-3">
         <Row xs={1} md={1} lg={1}>
           <Col>
-            <Card {...getRootProps()} className="m-1 mt-3">
-              <Card.Body className="text-center">
+            <Card {...getRootProps({ style })} className="m-1 mt-3">
+              <Card.Body onClick={open} className="text-center">
                 <input {...getInputProps()} />
                 <Plus className="text-center text-muted" />
                 <p className="text-center text-muted">
-                  click or drag to add your files
+                  tap or drag to add your files
                 </p>
               </Card.Body>
             </Card>
@@ -244,7 +296,9 @@ export default function UserAccount() {
           <Col>
             <Card className="mt-3 m-1">
               <Card.Body className="text-center text-muted">
-                <Col>{images}</Col>
+                <Row key={filepath.name}>
+                  <Col>{filepath}</Col>
+                </Row>
               </Card.Body>
             </Card>
           </Col>

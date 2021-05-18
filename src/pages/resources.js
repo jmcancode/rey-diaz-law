@@ -1,11 +1,16 @@
+import { motion } from "framer-motion";
 import React from "react";
-import { Container, Row, Col, Accordion, Card } from "react-bootstrap";
+import { Row, Col, Accordion, Card } from "react-bootstrap";
 import TopNav from "../components/navBar";
 export default function LegalResources() {
   return (
     <>
       <TopNav />
-      <Container className="pt-3 p-4">
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="container pt-3 p-4"
+      >
         <Row xs={1} md={1} lg={1} className="pt-2 pb-2">
           <Col className="text-center">
             <h2>Roadside Assistance</h2>
@@ -112,7 +117,7 @@ export default function LegalResources() {
             </p>
           </Col>
         </Row>
-      </Container>
+      </motion.div>
     </>
   );
 }

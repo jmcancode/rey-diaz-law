@@ -1,12 +1,17 @@
+import { motion } from "framer-motion";
 import React from "react";
-import { Container, Row, Col, Card, Accordion } from "react-bootstrap";
+import { Row, Col, Card, Accordion } from "react-bootstrap";
 import TopNav from "../components/navBar";
 
 export default function LegalGlossary() {
   return (
     <>
       <TopNav />
-      <Container className="pt-3 p-4">
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="contianer pt-3 p-4"
+      >
         <Row xs={1} md={1} lg={1} className="pt-2 pb-2">
           <Col className="text-center">
             <h2>Personal Injury Glossary</h2>
@@ -153,7 +158,7 @@ export default function LegalGlossary() {
         <Row className="w-100 h-50" xs={1} md={1} lg={1}>
           <Col className="h-100">
             <p className="text-muted text-center mt-3" style={{ fontSize: 10 }}>
-              San Antonio Website Design by
+              San Antonio Website by
               <a
                 target="__blank"
                 href="https://www.j12designs.com"
@@ -169,7 +174,7 @@ export default function LegalGlossary() {
             </p>
           </Col>
         </Row>{" "}
-      </Container>
+      </motion.div>
     </>
   );
 }

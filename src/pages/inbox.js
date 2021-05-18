@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Container,
   Col,
   Row,
   Card,
@@ -12,16 +11,18 @@ import {
 } from "react-bootstrap";
 import { db } from "../Firebase/config";
 import TopNav from "../components/navBar";
+import { motion } from "framer-motion";
 
 const UserInbox = () => {
   const [email, setEmail] = useState("");
   const [loader, setLoader] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoader(true);
 
-    db.collection("subscribers")
+    await db
+      .collection("subscribers")
       .add({
         email: email,
       })
@@ -39,7 +40,11 @@ const UserInbox = () => {
   return (
     <>
       <TopNav />
-      <Container className="pt-3">
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="container pt-3"
+      >
         <Row>
           <Col>
             <Jumbotron className="bg-transparent">
@@ -137,11 +142,11 @@ const UserInbox = () => {
             </Card>
           </Col>
         </Row>
-        <Row xs={1} md={1} lg={1}>
+        <Row className="pt-3" xs={1} md={1} lg={1}>
           <Col>
-            <Card className="mb-2">
-              <Accordion defaultActiveKey="0">
-                <Card>
+            <Card border="light" className="mb-2">
+              <Accordion>
+                <Card style={{ borderColor: "transparent" }}>
                   <Accordion.Toggle
                     as={Card.Header}
                     variant="outlined"
@@ -158,7 +163,7 @@ const UserInbox = () => {
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
-                <Card>
+                <Card style={{ borderColor: "transparent" }}>
                   <Accordion.Toggle
                     as={Card.Header}
                     variant="outlined"
@@ -175,7 +180,7 @@ const UserInbox = () => {
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
-                <Card>
+                <Card style={{ borderColor: "transparent" }}>
                   <Accordion.Toggle
                     as={Card.Header}
                     variant="outlined"
@@ -196,7 +201,7 @@ const UserInbox = () => {
             </Card>
           </Col>
         </Row>
-      </Container>
+      </motion.div>
     </>
   );
 };

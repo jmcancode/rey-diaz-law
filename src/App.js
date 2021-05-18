@@ -16,7 +16,6 @@ import DidYouKnowDetail from "./pages/didyouknowdetails";
 import LegalGlossary from "./pages/glossary";
 import LegalResources from "./pages/resources";
 import WhatsNewBlog from "./pages/whatsnew";
-
 import firebase from "./Firebase/config";
 
 function App() {
@@ -34,14 +33,9 @@ function App() {
 
   useEffect(() => {
     Notification.requestPermission()
-      .then(() =>
-        firebase.messaging.getToken({
-          vapidKey:
-            "BEg8-GcOGn9wNYlrBof6YXqMer3SWvrGCyQg0m4ySCCIRdC0XfCR4M1An6pGWZamXftGsPaB73sx8jvcGiEoDfk",
-        })
-      )
+      .then(() => firebase.auth().currentUser.getIdTokenResult({}))
       .then((currentToken) => {
-        console.log(currentToken);
+        console.log(currentToken, "Message was successful");
       })
       .catch((err) => {
         console.log(err);

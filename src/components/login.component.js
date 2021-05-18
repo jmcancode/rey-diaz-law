@@ -1,8 +1,11 @@
 import React, { useState, useRef } from "react";
 import { useAuth } from "../Firebase/context";
 import { useHistory, Link } from "react-router-dom";
-import { Alert, Container, Form, Card, Image, Row, Col } from "react-bootstrap";
+import { Alert, Form, Card, Image, Row, Col } from "react-bootstrap";
 import loginLogo from "../assets/Rey-Diaz-Logos-Blue.png";
+import { signInWithGoogle } from "../Firebase/config";
+import { FcGoogle } from "react-icons/fc";
+import { motion } from "framer-motion";
 
 export default function Login() {
   const emailRef = useRef();
@@ -23,26 +26,42 @@ export default function Login() {
     } catch {
       setError("Failed to log in. Are you sure you registered?");
     }
-
     setLoading(false);
   }
 
   return (
     <>
-      <Container style={{ backgroundColor: "#f5f5f5" }} className=" mt-5 pt-5">
-        <Row xs={1} md={1} lg={1}>
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="container"
+        style={{ backgroundColor: "#f5f5f5" }}
+      >
+        <Row xs={1} md={1} lg={1} className="text-center">
           <Col sm>
-            <Image fluid src={loginLogo} className="w-100 h-55 p-5" />
-          </Col>
-          <Col>
-            <h2 className="text-center text-uppercase text-muted pb-2">
-              Client Portal
-            </h2>
+            <Image
+              fluid
+              src={loginLogo}
+              style={{ width: "45%", height: "100%" }}
+            />
           </Col>
         </Row>
-        <Row>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="container"
+      >
+        <Row xs={1} md={1} lg={1}>
           <Col>
-            <Card body>
+            <h4 className="text-center text-uppercase text-muted pb-2">
+              Client Portal
+            </h4>
+          </Col>
+        </Row>
+        <Row xs={1} md={1} lg={1}>
+          <Col>
+            <Card style={{ borderColor: "transparent" }} body className="m-3">
               <Form onSubmit={handleSubmit}>
                 {error && <Alert variant="danger">{error}</Alert>}
                 <div className="form-group">
@@ -85,11 +104,12 @@ export default function Login() {
 
                 <button
                   type="submit"
-                  className="btn btn-dark btn-lg btn-block"
+                  className="btn btn-dark btn-sm btn-block text-uppercase"
                   disabled={loading}
                 >
-                  Sign in
+                  log in
                 </button>
+
                 {error && <Alert variant="danger">{error}</Alert>}
                 <p className="forgot-password text-right">
                   Need an account? Sign-up <Link to="sign-up">here</Link>
@@ -97,8 +117,15 @@ export default function Login() {
               </Form>
             </Card>
           </Col>
+          <Col className="text-right">
+            <FcGoogle
+              size="35"
+              style={{ marginRight: 20 }}
+              onClick={() => signInWithGoogle()}
+            />
+          </Col>
         </Row>
-      </Container>
+      </motion.div>
     </>
   );
 }

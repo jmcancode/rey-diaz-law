@@ -4,17 +4,21 @@ import "firebase/analytics";
 import "firebase/firestore";
 
 const firebaseApp = firebase.initializeApp({
-  apiKey: "AIzaSyAvnhJIWDkOttiS4c_aPy7v9krdEjJB0Z8",
-  authDomain: "rey-di.firebaseapp.com",
-  projectId: "rey-di",
-  storageBucket: "rey-di.appspot.com",
-  messagingSenderId: "127282603496",
-  appId: "1:127282603496:web:fb67c451b1416ce41e705d",
-  measurementId: "G-ECE5V7YVY3",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGE_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 });
+
+export const provider = new firebase.auth.GoogleAuthProvider();
+provider.setCustomParameters({ prompt: "select_account" });
+export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 export const auth = firebase.auth();
 export const db = firebaseApp.firestore();
 export const analytics = firebase.analytics().logEvent("notification_received");
-export const provider = new firebase.auth.GoogleAuthProvider();
+
 export default firebaseApp;

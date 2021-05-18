@@ -14,12 +14,17 @@ import {
   FacebookIcon,
 } from "react-share";
 import { FiShare } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 export default function DidYouKnowDetail() {
   return (
     <>
       <TopNav />
-      <Container className="w-100 pt-3">
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="container w-100 pt-3"
+      >
         <Image src={featurePhoto} width="100%" />
         <Row xs={1} md={1} lg={1} className="pt-3">
           <Col>
@@ -63,7 +68,7 @@ export default function DidYouKnowDetail() {
             </p>
           </Col>
         </Row>
-      </Container>
+      </motion.div>
       <Container className="h-10 text-center">
         <Row xs={1} md={1} lg={1}>
           <Col>

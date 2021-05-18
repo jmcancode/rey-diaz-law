@@ -16,7 +16,9 @@ export function AuthProvider({ children }) {
   }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+    return auth.setPersistence(auth.Auth.Persistence.LOCAL).then(() => {
+      return auth.signInWithEmailAndPassword(email, password);
+    });
   }
 
   function logout() {
@@ -38,7 +40,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
-      console.log(user);
+      // console.log(user);
       setLoading(false);
     });
     return unsubscribe;
