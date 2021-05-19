@@ -13,12 +13,8 @@ const firebaseApp = firebase.initializeApp({
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 });
 
-export const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
-
 export const auth = firebase.auth();
 export const db = firebaseApp.firestore();
-export const analytics = firebase.analytics().logEvent("notification_received");
+export const analytics = firebase.analytics();
 
 export default firebaseApp;

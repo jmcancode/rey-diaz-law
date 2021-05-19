@@ -1,6 +1,7 @@
 {
   "short_name": "Client Portal",
   "name": "Rey Diaz Law",
+  "gcm-sender-id": "127282603496",
   "icons": [
     {
       "src": "favicon.ico",

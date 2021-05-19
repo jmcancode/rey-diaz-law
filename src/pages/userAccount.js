@@ -1,10 +1,18 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Form,
+  Button,
+  Alert,
+} from "react-bootstrap";
 import TopNav from "../components/navBar";
 
 import { Plus } from "react-bootstrap-icons";
 import { useDropzone } from "react-dropzone";
-
+import { motion } from "framer-motion";
 import { db } from "../Firebase/config";
 import { useAuth } from "../Firebase/context";
 import Avatar from "react-avatar";
@@ -72,7 +80,11 @@ export default function UserAccount() {
       })
       .then(() => {
         setLoader(false);
-        alert("Your account was successfully set up. Welcome!");
+        return (
+          <Alert variant="success">
+            You've successfully created an account!{" "}
+          </Alert>
+        );
       })
       .catch((error) => {
         alert(error.message);
@@ -137,15 +149,19 @@ export default function UserAccount() {
   );
 
   const filepath = acceptedFiles.map((file) => (
-    <li key={file.path}>
+    <li key={file.id}>
       {file.path} - {file.size} bytes
     </li>
   ));
   return (
     <>
       <TopNav />
-      <Container className="pt-3">
-        <Card key={users.doc} className="p-3 m-3">
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        className="pt-3 container"
+      >
+        <Card key={users} className="p-3 m-3">
           <Row xs={1} md={1} lg={1}>
             <Col className="text-center">
               {users.map(({ imageUrl }) => (
@@ -275,7 +291,7 @@ export default function UserAccount() {
             </Col>
           </Row>
         </Card>
-      </Container>
+      </motion.div>
       <Container className="pt-3">
         <Row xs={1} md={1} lg={1}>
           <Col>

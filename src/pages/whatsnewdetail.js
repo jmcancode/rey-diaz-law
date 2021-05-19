@@ -17,7 +17,7 @@ export default function WhatsNewDetail() {
         <Row>
           <Col>
             {whatsNew.map(({ doc, blogTitle, blogContent }) => (
-              <Card key={doc.id} id={doc.id}>
+              <Card key={doc.id}>
                 <Card.Img src={image} alt="card image" />
                 <Card.Title>{blogTitle}</Card.Title>
                 <Card.Body>{blogContent}</Card.Body>
@@ -29,3 +29,4 @@ export default function WhatsNewDetail() {
     </>
   );
 }
+ 

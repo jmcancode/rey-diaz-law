@@ -484,6 +484,81 @@ export default function AdminDash() {
                 >
                   {(props) => (
                     <div>
+                      <h5>Add a new Client</h5>
+                      <hr />
+                      <Form>
+                        <Row xs={3} md={3} lg={3}>
+                          <Col>
+                            <Form.Control
+                              type="text"
+                              placeholder="Full Name"
+                              required
+                            />
+                          </Col>
+                          <Col>
+                            <Form.Control
+                              type="email"
+                              required
+                              placeholder="somename@emailaddress.com"
+                            />
+                          </Col>
+                          <Col>
+                            <Form.Control
+                              type="number"
+                              required
+                              placeholder="2101231123"
+                            />
+                          </Col>
+                        </Row>
+                        <Row className="pt-2" xs={1} md={1} lg={1} s>
+                          <Col>
+                            <Form.Control
+                              required
+                              text="text"
+                              placeholder="Address"
+                            />
+                          </Col>
+                          <Col className="pt-2">
+                            <Form.Control
+                              text="text"
+                              placeholder="Apt, FL, Bldg #"
+                            />
+                          </Col>
+                        </Row>
+                        <Row xs={3} md={3} lg={3} className="pt-2">
+                          <Col>
+                            <Form.Control as="select">
+                              <option>Choose one...</option>
+                              <option>San Antonio</option>
+                              <option>Austin</option>
+                              <option>Edinburg</option>
+                              <option>Laredo</option>
+                            </Form.Control>
+                          </Col>
+                          <Col>
+                            <Form.Control as="select">
+                              <option>Choose one...</option>
+                              <option>Texas</option>
+                            </Form.Control>
+                          </Col>
+                          <Col>
+                            <Form.Control placeholder="Zip" />
+                          </Col>
+                        </Row>
+                        <Button
+                          className="mt-2"
+                          size="sm"
+                          block
+                          style={{
+                            backgroundColor: "#bfa36f",
+                            borderColor: "transparent",
+                          }}
+                          type="sumbit"
+                        >
+                          Sumbit
+                        </Button>
+                      </Form>
+                      <hr />
                       <SearchBar
                         style={{
                           borderRightColor: "transparent",
@@ -493,7 +568,7 @@ export default function AdminDash() {
                         }}
                         {...props.searchProps}
                       />
-                      <hr />
+
                       <BootstrapTable {...props.baseProps} />
                     </div>
                   )}

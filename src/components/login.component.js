@@ -3,8 +3,7 @@ import { useAuth } from "../Firebase/context";
 import { useHistory, Link } from "react-router-dom";
 import { Alert, Form, Card, Image, Row, Col } from "react-bootstrap";
 import loginLogo from "../assets/Rey-Diaz-Logos-Blue.png";
-import { signInWithGoogle } from "../Firebase/config";
-import { FcGoogle } from "react-icons/fc";
+
 import { motion } from "framer-motion";
 
 export default function Login() {
@@ -17,7 +16,7 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
+    setLoading(false);
     try {
       setError("");
       setLoading(true);
@@ -104,7 +103,7 @@ export default function Login() {
 
                 <button
                   type="submit"
-                  className="btn btn-dark btn-sm btn-block text-uppercase"
+                  className="btn btn-dark btn-sm btn-block"
                   disabled={loading}
                 >
                   log in
@@ -116,13 +115,6 @@ export default function Login() {
                 </p>
               </Form>
             </Card>
-          </Col>
-          <Col className="text-right">
-            <FcGoogle
-              size="35"
-              style={{ marginRight: 20 }}
-              onClick={() => signInWithGoogle()}
-            />
           </Col>
         </Row>
       </motion.div>
