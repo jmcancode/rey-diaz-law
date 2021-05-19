@@ -402,10 +402,16 @@ export default function AdminDash() {
         className=" container h-100 mt-1 mb-3"
       >
         <Row className="pt-3" xs={1} md={3} lg={3}>
-          <Col>
-            <Card>
+          <Col className="mb-1">
+            <Card
+              style={{
+                height: "150px",
+                borderRadius: "15px",
+                borderColor: "#bfa36f",
+              }}
+            >
               <Card.Body className=" text-center text-uppercase">
-                <h5>Did you Know?</h5>
+                <p>Did you Know?</p>
                 <Button
                   size="sm"
                   style={{
@@ -425,10 +431,16 @@ export default function AdminDash() {
               </Card.Body>
             </Card>
           </Col>
-          <Col>
-            <Card className="">
-              <Card.Body className="text-center text-uppercase">
-                <h5>Whats New</h5>
+          <Col className="mb-1">
+            <Card
+              style={{
+                height: "150px",
+                borderRadius: "15px",
+                borderColor: "#bfa36f",
+              }}
+            >
+              <Card.Body className=" text-center text-uppercase">
+                <p>Whats New</p>
                 <Button
                   size="sm"
                   style={{
@@ -448,10 +460,16 @@ export default function AdminDash() {
               </Card.Body>
             </Card>
           </Col>
-          <Col>
-            <Card className="">
+          <Col className="mb-1">
+            <Card
+              style={{
+                height: "150px",
+                borderRadius: "15px",
+                borderColor: "#bfa36f",
+              }}
+            >
               <Card.Body className="text-center text-uppercase">
-                <h5>Free Information</h5>
+                <p>Free Information</p>
                 <Button
                   size="sm"
                   style={{
@@ -474,8 +492,11 @@ export default function AdminDash() {
         </Row>
         <Row className="pt-3">
           <Col>
-            <Card className="d-none d-sm-block	d-sm-none d-md-block">
-              <Card.Body>
+            <Card
+              style={{ borderColor: "#bfa36f", borderRadius: "15px" }}
+              className="d-none d-sm-block	d-sm-none d-md-block"
+            >
+              <Card.Body className="text-uppercase">
                 <ToolkitProvider
                   keyField="id"
                   data={products}
@@ -484,7 +505,7 @@ export default function AdminDash() {
                 >
                   {(props) => (
                     <div>
-                      <h5>Add a new Client</h5>
+                      <h5>Add a new client</h5>
                       <hr />
                       <Form>
                         <Row xs={3} md={3} lg={3}>
@@ -504,7 +525,7 @@ export default function AdminDash() {
                           </Col>
                           <Col>
                             <Form.Control
-                              type="number"
+                              type="tel"
                               required
                               placeholder="2101231123"
                             />
