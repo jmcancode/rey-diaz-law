@@ -15,7 +15,6 @@ import { useDropzone } from "react-dropzone";
 import { motion } from "framer-motion";
 import { db } from "../Firebase/config";
 import { useAuth } from "../Firebase/context";
-import Avatar from "react-avatar";
 
 const baseStyle = {
   flex: 1,
@@ -61,11 +60,12 @@ export default function UserAccount() {
   const { currentUser } = useAuth();
   const [users, setUsers] = useState([]);
 
-  const handleUserSubmit = (e) => {
+  const handleUserSubmit = async (e) => {
     e.preventDefault();
     setLoader(true);
 
-    db.collection("users")
+    await db
+      .collection("users")
       .add({
         email: email,
         password: password,
@@ -77,6 +77,7 @@ export default function UserAccount() {
         state: state,
         zip: zip,
         imageUrl: imageUrl,
+        createdAt: new Date().toISOString(),
       })
       .then(() => {
         setLoader(false);
@@ -161,20 +162,13 @@ export default function UserAccount() {
         animate={{ opacity: 1, x: 0 }}
         className="pt-3 container"
       >
-        <Card key={users} className="p-3 m-3">
-          <Row xs={1} md={1} lg={1}>
-            <Col className="text-center">
-              {users.map(({ imageUrl }) => (
-                <Avatar src={imageUrl} round={true} />
-              ))}
-            </Col>
-          </Row>
-          <Row className="pt-2" xs={1} md={1} lg={1}>
-            <Col className="text-center">{!currentUser && <p>Welcome</p>}</Col>
+        <Card className="p-3 m-3">
+          <Row className="pt-2 pb-2" xs={1} md={1} lg={1}>
             <Col className="m-1 pb-4">
-              {users.map(({ firstName }) => (
-                <p className="text-center">Welcome back, {firstName}</p>
-              ))}
+              <h5 className="text-center text-uppercase">Welcome </h5>
+            </Col>
+            <Col>
+              <p>Before your appointment please fill the entire form below.</p>
             </Col>
           </Row>
           <Row>
@@ -187,7 +181,7 @@ export default function UserAccount() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       type="email"
-                      placeholder="Enter email"
+                      placeholder="email"
                     />
                   </Form.Group>
 
@@ -205,8 +199,10 @@ export default function UserAccount() {
                 <Form.Group controlId="formGridAddress1">
                   <Form.Label>First Name</Form.Label>
                   <Form.Control
+                    placeholder="First name"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
+                    type="text"
                   />
                 </Form.Group>
                 <Form.Group controlId="formGridAddress1">
@@ -214,6 +210,8 @@ export default function UserAccount() {
                   <Form.Control
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
+                    type="text"
+                    placeholder="Last name"
                   />
                 </Form.Group>
 
@@ -310,7 +308,7 @@ export default function UserAccount() {
       <Container>
         <Row>
           <Col>
-            <Card className="mt-3 m-1">
+            <Card key={filepath} className="mt-3 m-1">
               <Card.Body className="text-center text-muted">
                 <Row key={filepath.name}>
                   <Col>{filepath}</Col>

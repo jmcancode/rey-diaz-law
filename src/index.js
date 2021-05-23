@@ -9,10 +9,14 @@ import "react-datetime/css/react-datetime.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import { AuthProvider } from "./Firebase/context";
+
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </BrowserRouter>,
   document.getElementById("root")
 );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Card, Modal, Button, Form } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { FiPlus } from "react-icons/fi";
@@ -11,121 +11,16 @@ import TopNav from "../components/navBar";
 
 import BootstrapTable from "react-bootstrap-table-next";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-// import cellEditFactory from "react-bootstrap-table2-editor";
-// import paginationFactory from "react-bootstrap-table2-paginator";
-
 import { db } from "../Firebase/config";
 
 const handleDateClick = (arg) => {
   alert(arg.dateStr);
 };
 const { SearchBar } = Search;
-const products = [
-  {
-    id: "1",
-    name: "Juan Doe",
-    email: "jd@someemail.com",
-    phone: "210-803-0109",
-    location: "San Antonio",
-  },
-  {
-    id: "2",
-    name: "Jane Doe",
-    email: "jd@someemail.com",
-    phone: "210-803-0109",
-    location: "Austin",
-  },
-  {
-    id: "3",
-    name: "Jack Doe",
-    email: "jd@someemail.com",
-    phone: "210-803-0109",
-    location: "Laradeo",
-  },
-  {
-    id: "4",
-    name: "Mark Doe",
-    email: "jd@someemail.com",
-    phone: "210-803-0109",
-    location: "Edinburg",
-  },
-  {
-    id: "5",
-    name: "Carl Doe",
-    email: "jd@someemail.com",
-    phone: "210-803-0109",
-    location: "San Antonio",
-  },
-  {
-    id: "6",
-    name: "Kyle Doe",
-    email: "jd@someemail.com",
-    phone: "210-803-0109",
-    location: "San Antonio",
-  },
-  {
-    id: "7",
-    name: "Juana Doe",
-    email: "jd@someemail.com",
-    phone: "210-803-0109",
-    location: "San Antonio",
-  },
-  {
-    id: "8",
-    name: "Juanitta Doe",
-    email: "jd@someemail.com",
-    phone: "210-803-0109",
-    location: "San Antonio",
-  },
-  {
-    id: "9",
-    name: "James Doe",
-    email: "jd@someemail.com",
-    phone: "210-803-0109",
-    location: "San Antonio",
-  },
-  {
-    id: "10",
-    name: "Juan R. Doe",
-    email: "jd@someemail.com",
-    phone: "210-803-0109",
-    location: "San Antonio",
-  },
-  {
-    id: "11",
-    name: "Michael Doe",
-    email: "jd@someemail.com",
-    phone: "210-803-0109",
-    location: "San Antonio",
-  },
-];
-const columns = [
-  {
-    dataField: "id",
-    text: "Client id",
-    headerAlign: "left",
-  },
-  {
-    dataField: "name",
-    text: "Client Name",
-    headerAlign: (column, colIndex) => "left",
-  },
-  {
-    dataField: "email",
-    text: "Email Address",
-    headerAlign: "left",
-  },
-  {
-    dataField: "phone",
-    text: "Phone Number",
-    headerAlign: "left",
-  },
-  {
-    dataField: "location",
-    text: "Location",
-    headerAlign: "left",
-  },
-];
+
+const expandRow = {
+  renderer: (row) => <div></div>,
+};
 
 function MyVerticallyCenteredModal(props) {
   const [files, setFiles] = useState("");
@@ -133,19 +28,21 @@ function MyVerticallyCenteredModal(props) {
   const [content, setContent] = useState("");
   const [loader, setLoader] = useState("");
 
-  const handleBlogSubmit = (e) => {
+  const handleBlogSubmit = async (e) => {
     e.preventDefault();
     setLoader(true);
 
-    db.collection("dyk")
+    await db
+      .collection("dyk")
       .add({
         files: files,
         title: title,
         content: content,
+        createdAt: new Date().toDateString(),
       })
       .then(() => {
         setLoader(false);
-        alert("Did you know uploaded ");
+        alert("Did you know...you successfully uploaded to the data base!!");
       })
       .catch((error) => {
         alert(error.message);
@@ -226,18 +123,20 @@ function MyVerticallyCenteredModalTwo(props) {
   const [blogTitle, setBlogTitle] = useState("");
   const [loading, setLoading] = useState("");
 
-  const handleWhatsNew = (e) => {
+  const handleWhatsNew = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    db.collection("whatsNew")
+    await db
+      .collection("whatsNew")
       .add({
         blogTitle: blogTitle,
         blogContent: blogContent,
+        createdAt: new Date().toDateString(),
       })
       .then(() => {
         setLoading(false);
-        alert("Whats new uploaded ");
+        alert("Upload successful! You need a 2 hour lunch now! ");
       })
       .catch((error) => {
         alert(error.message);
@@ -318,10 +217,11 @@ function MyVerticallyCenteredModalThree(props) {
       .add({
         blogTitle: blogTitle,
         blogContent: blogContent,
+        createdAt: new Date().toDateString(),
       })
       .then(() => {
         setLoading(false);
-        alert("Whats new uploaded ");
+        alert("Successfully upload! Great job, take the day off! ");
       })
       .catch((error) => {
         alert(error.message);
@@ -331,6 +231,7 @@ function MyVerticallyCenteredModalThree(props) {
     setBlogTitle("");
     setBlogContent("");
   };
+
   return (
     <Modal
       {...props}
@@ -391,9 +292,96 @@ function MyVerticallyCenteredModalThree(props) {
 
 export default function AdminDash() {
   const [modalShow, setModalShow] = useState(false);
+  const [modalShowTwo, setModalShowTwo] = useState(false);
+  const [modalShowThree, setModalShowThree] = useState(false);
+  const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressTwo, setAddressTwo] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
+  const [tel, setTel] = useState("");
+  const [loader, setLoader] = useState("");
+  const [clients, setClients] = useState("");
 
+  const handleClientSubmit = async (e) => {
+    e.preventDefault();
+    setLoader(true);
+
+    await db
+      .collection("client")
+      .add({
+        email: email,
+        fullName: fullName,
+        address: address,
+        addressTwo: addressTwo,
+        city: city,
+        tel: tel,
+        state: state,
+        zip: zip,
+        createdAt: new Date().toDateString(),
+      })
+      .then(() => {
+        setLoader(false);
+        alert("You've successfully created a client account! ");
+      })
+      .catch((error) => {
+        alert(error.message);
+        setLoader(false);
+      });
+    setEmail("");
+
+    setFullName("");
+    setAddress("");
+    setCity("");
+    setTel("");
+    setState("");
+    setZip("");
+  };
+
+  useEffect(() => {
+    db.collection("client")
+      .orderBy("createdAt", "desc")
+      .onSnapshot({ includeMetadataChanges: true }, (snapshot) =>
+        setClients(snapshot.docs.map((doc) => doc.data()))
+      );
+    return () => {
+      setLoader(false);
+    };
+  }, []);
+
+  const products = [];
+
+  const columns = [
+    {
+      dataField: "id",
+      text: "Client id",
+      headerAlign: "left",
+    },
+    {
+      dataField: "name",
+      text: "Client Name",
+      headerAlign: (column, colIndex) => "left",
+    },
+    {
+      dataField: "email",
+      text: "Email Address",
+      headerAlign: "left",
+    },
+    {
+      dataField: "phone",
+      text: "Phone Number",
+      headerAlign: "left",
+    },
+    {
+      dataField: "location",
+      text: "Location",
+      headerAlign: "left",
+    },
+  ];
   return (
-    <>
+    <React.Fragment>
       <TopNav />
       <motion.div
         initial={{ opacity: 0, x: -50 }}
@@ -448,14 +436,14 @@ export default function AdminDash() {
                     borderColor: "transparent",
                   }}
                   variant="primary"
-                  onClick={() => setModalShow(true)}
+                  onClick={() => setModalShowTwo(true)}
                 >
                   <FiPlus /> Add a post
                 </Button>
 
                 <MyVerticallyCenteredModalTwo
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
+                  show={modalShowTwo}
+                  onHide={() => setModalShowTwo(false)}
                 />
               </Card.Body>
             </Card>
@@ -477,14 +465,14 @@ export default function AdminDash() {
                     borderColor: "transparent",
                   }}
                   variant="primary"
-                  onClick={() => setModalShow(true)}
+                  onClick={() => setModalShowThree(true)}
                 >
                   <FiPlus /> Add a post
                 </Button>
 
                 <MyVerticallyCenteredModalThree
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
+                  show={modalShowThree}
+                  onHide={() => setModalShowThree(false)}
                 />
               </Card.Body>
             </Card>
@@ -497,88 +485,113 @@ export default function AdminDash() {
               className="d-none d-sm-block	d-sm-none d-md-block"
             >
               <Card.Body className="text-uppercase">
+                <h5>Add a new client</h5>
+                <hr />
+                <Form onSubmit={handleClientSubmit}>
+                  <Row xs={3} md={3} lg={3}>
+                    <Col>
+                      <Form.Control
+                        type={fullName}
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                        placeholder="Full name"
+                        required
+                      />
+                    </Col>
+                    <Col>
+                      <Form.Control
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        type="email"
+                        required
+                        placeholder="email@email.com"
+                      />
+                    </Col>
+                    <Col>
+                      <Form.Control
+                        value={tel}
+                        onChange={(e) => setTel(e.target.value)}
+                        type="tel"
+                        required
+                        placeholder="2101231123"
+                      />
+                    </Col>
+                  </Row>
+                  <Row className="pt-2" xs={1} md={1} lg={1} s>
+                    <Col>
+                      <Form.Control
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        required
+                        text="text"
+                        placeholder="Address"
+                      />
+                    </Col>
+                    <Col className="pt-2">
+                      <Form.Control
+                        vale={addressTwo}
+                        onChange={(e) => setAddressTwo(e.target.value)}
+                        text="text"
+                        placeholder="Apt, FL, Bldg #"
+                      />
+                    </Col>
+                  </Row>
+                  <Row xs={3} md={3} lg={3} className="pt-2">
+                    <Col>
+                      <Form.Control
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        required
+                        as="select"
+                      >
+                        <option>Choose one...</option>
+                        <option>San Antonio</option>
+                        <option>Austin</option>
+                        <option>Edinburg</option>
+                        <option>Laredo</option>
+                      </Form.Control>
+                    </Col>
+                    <Col>
+                      <Form.Control
+                        required
+                        as="select"
+                        value={state}
+                        onChange={(e) => setState(e.target.value)}
+                      >
+                        <option>Choose one...</option>
+                        <option>Texas</option>
+                      </Form.Control>
+                    </Col>
+                    <Col>
+                      <Form.Control
+                        value={zip}
+                        onChange={(e) => setZip(e.target.value)}
+                        required
+                        placeholder="Zip"
+                      />
+                    </Col>
+                  </Row>
+                  <Button
+                    className="mt-2"
+                    size="sm"
+                    block
+                    style={{
+                      backgroundColor: loader ? "#c02626" : "#bfa36f",
+                      borderColor: "transparent",
+                    }}
+                    type="sumbit"
+                  >
+                    {loader ? "Loading... " : "submit"}
+                  </Button>
+                </Form>
                 <ToolkitProvider
                   keyField="id"
                   data={products}
                   columns={columns}
-                  search
+                  search={true}
                 >
                   {(props) => (
                     <div>
-                      <h5>Add a new client</h5>
-                      <hr />
-                      <Form>
-                        <Row xs={3} md={3} lg={3}>
-                          <Col>
-                            <Form.Control
-                              type="text"
-                              placeholder="Full Name"
-                              required
-                            />
-                          </Col>
-                          <Col>
-                            <Form.Control
-                              type="email"
-                              required
-                              placeholder="somename@emailaddress.com"
-                            />
-                          </Col>
-                          <Col>
-                            <Form.Control
-                              type="tel"
-                              required
-                              placeholder="2101231123"
-                            />
-                          </Col>
-                        </Row>
-                        <Row className="pt-2" xs={1} md={1} lg={1} s>
-                          <Col>
-                            <Form.Control
-                              required
-                              text="text"
-                              placeholder="Address"
-                            />
-                          </Col>
-                          <Col className="pt-2">
-                            <Form.Control
-                              text="text"
-                              placeholder="Apt, FL, Bldg #"
-                            />
-                          </Col>
-                        </Row>
-                        <Row xs={3} md={3} lg={3} className="pt-2">
-                          <Col>
-                            <Form.Control as="select">
-                              <option>Choose one...</option>
-                              <option>San Antonio</option>
-                              <option>Austin</option>
-                              <option>Edinburg</option>
-                              <option>Laredo</option>
-                            </Form.Control>
-                          </Col>
-                          <Col>
-                            <Form.Control as="select">
-                              <option>Choose one...</option>
-                              <option>Texas</option>
-                            </Form.Control>
-                          </Col>
-                          <Col>
-                            <Form.Control placeholder="Zip" />
-                          </Col>
-                        </Row>
-                        <Button
-                          className="mt-2"
-                          size="sm"
-                          block
-                          style={{
-                            backgroundColor: "#bfa36f",
-                            borderColor: "transparent",
-                          }}
-                          type="sumbit"
-                        >
-                          Sumbit
-                        </Button>
-                      </Form>
                       <hr />
                       <SearchBar
                         style={{
@@ -590,7 +603,13 @@ export default function AdminDash() {
                         {...props.searchProps}
                       />
 
-                      <BootstrapTable {...props.baseProps} />
+                      <BootstrapTable
+                        wrapperClasses="table-responsive"
+                        striped
+                        bordered={false}
+                        expandRow={expandRow}
+                        {...props.baseProps}
+                      />
                     </div>
                   )}
                 </ToolkitProvider>
@@ -618,6 +637,7 @@ export default function AdminDash() {
             />
           </Col>
         </Row>
+
         <Row className="w-100" xs={1} md={1} lg={1}>
           <Col className="h-100">
             <p className="text-muted text-center mt-3" style={{ fontSize: 10 }}>
@@ -638,6 +658,6 @@ export default function AdminDash() {
           </Col>
         </Row>
       </motion.div>
-    </>
+    </React.Fragment>
   );
 }

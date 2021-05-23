@@ -35,13 +35,10 @@ export default function TopNav() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mx-auto">
-            <Nav.Link as={Link} to="/admin">
-              Admin
-            </Nav.Link>
             <Nav.Link as={Link} to="/" href="#admin">
               Dashboard
             </Nav.Link>
-            <Nav.Link as={Link} to="/inbox" href="#inbox">
+            <Nav.Link as={Link} to="/location" href="#inbox">
               Locations
             </Nav.Link>
             <NavDropdown title="Resouces" id="collasible-nav-dropdown">

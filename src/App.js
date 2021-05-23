@@ -24,10 +24,10 @@ function App() {
     navigator.serviceWorker
       .register("firebase-messaging-sw.js")
       .then(function (registration) {
-        console.log("[SW]: SCOPE: ", registration.scope);
+        console.error("[SW]: SCOPE: ", registration.scope);
         return registration.scope;
       })
-      .catch(function (err) {
+      .catch((err) => {
         return err;
       });
   }
@@ -35,15 +35,16 @@ function App() {
   useEffect(() => {
     Notification.requestPermission()
       .then(() =>
-        firebase.auth().currentUser.getIdToken({
+        messaging.getToken({
           vapidKey: process.env.REACT_APP_VAPID_KEY,
         })
       )
       .then((currentToken) => {
-        messaging.getIdTokenResult(currentToken, "Message was successful");
+        console.log(currentToken)
+        firebase.firestore().collection('notification').add()
       })
       .catch((err) => {
-        console.log(err);
+        console.warn(err);
       });
   }, []);
 
@@ -54,14 +55,14 @@ function App() {
           <Switch>
             <Route path="/sign-in" component={Login} />
             <Route path="/sign-up" component={SignUp} />
-            <Route path="/inbox" component={UserInbox} />
+            <Route path="/location" component={UserInbox} />
             <Route path="/myaccount" component={UserAccount} />
             <Route path="/admin" component={AdminDash} />
             <PrivateRoute exact path="/" component={Dashboard} />
             <PrivateRoute path="/didyouknow/:id" component={DidYouKnowDetail} />
             <PrivateRoute path="/legalglossary" component={LegalGlossary} />
             <PrivateRoute path="/resources" component={LegalResources} />
-            <PrivateRoute path="/whatsnew" component={WhatsNewBlog} />
+            <PrivateRoute path="/whatsnew/:id" component={WhatsNewBlog} />
           </Switch>
         </div>
       </Router>

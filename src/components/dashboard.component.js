@@ -16,11 +16,44 @@ import { motion } from "framer-motion";
 
 export default function Dashboard() {
   const [whatsNew, setWhatsNew] = useState([]);
+  const [freeInfo, setFreeInfo] = useState([]);
+  const [dyk, setDyk] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    db.collection("whatsNew").onSnapshot((snapshot) =>
-      setWhatsNew(snapshot.docs.map((doc) => doc.data()))
-    );
+    db.collection("whatsNew")
+      .orderBy("createdAt", "desc")
+      .limit(1)
+      .onSnapshot({ includeMetadataChanges: true }, (snapshot) =>
+        setWhatsNew(snapshot.docs.map((doc) => doc.data()))
+      );
+    return () => {
+      setLoading(false);
+    };
+  }, []);
+
+  useEffect(() => {
+    db.collection("dyk")
+      .orderBy("createdAt", "desc")
+      .limit(1)
+      .onSnapshot({ includeMetadataChanges: true }, (snapshot) =>
+        setDyk(snapshot.docs.map((doc) => doc.data()))
+      );
+    return () => {
+      setLoading(false);
+    };
+  }, []);
+
+  useEffect(() => {
+    db.collection("freeInformation")
+      .orderBy("createdAt", "desc")
+      .limit(1)
+      .onSnapshot({ includeMetadataChanges: true }, (snapshot) =>
+        setFreeInfo(snapshot.docs.map((doc) => doc.data()))
+      );
+    return () => {
+      setLoading(false);
+    };
   }, []);
 
   return (
@@ -29,29 +62,38 @@ export default function Dashboard() {
       <motion.div
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
-        className=" container h-100 mt-3"
+        className=" container mt-3"
       >
-        <Row className="d-flex align-self-stretch" xs={1} md={3} lg={3}>
-          <Col>
-            <Card className="h-100">
-              <Card.Img variant="top" src={dykphoto} />
-              <Card.Body>
-                <Card.Title>Did you know?</Card.Title>
-                <Card.Text className="text-left">
-                  Learn more and share with your network.
-                </Card.Text>
-                <Link to="/didyouknow" style={{ color: "#bfa36f" }}>
-                  Read More
-                </Link>
-              </Card.Body>
-            </Card>
+        <Row xs={1} md={3} lg={3}>
+          <Col className="p-1 h-auto">
+            {dyk.map(({ title, content }) => (
+              <Card key={dyk.doc}>
+                <Card.Img
+                  className="pb-2"
+                  variant="top"
+                  src={dykphoto}
+                  alt="did you know?"
+                />
+                <Card.Body>
+                  <Card.Title className="text-uppercase">
+                    <h5>{title}</h5>
+                  </Card.Title>
+                  <Card.Text className="text-left">{content}</Card.Text>
+                  <Link to="/didyouknow" style={{ color: "#bfa36f" }}>
+                    Read More
+                  </Link>
+                </Card.Body>
+              </Card>
+            ))}
           </Col>
-          <Col className="p-1 h-100">
+          <Col className="p-1 h-auto">
             {whatsNew.map(({ blogTitle, blogContent }) => (
-              <Card key={whatsNew.id} className="h-100">
+              <Card key={whatsNew.doc} style={{ height: "100%" }}>
                 <Card.Img variant="top" src={newsphoto} alt="glossary-header" />
                 <Card.Body className="pb-5">
-                  <Card.Title>{blogTitle}</Card.Title>
+                  <Card.Title className="text-uppercase">
+                    <h5>{blogTitle}</h5>
+                  </Card.Title>
                   <Card.Text>{blogContent}</Card.Text>
                   <Link to="/whatsnew" style={{ color: "#bfa36f" }}>
                     Read more
@@ -60,20 +102,21 @@ export default function Dashboard() {
               </Card>
             ))}
           </Col>
-          <Col className="p-1 h-100">
-            <Card className="h-100">
-              <Card.Img variant="top" src={freephoto} alt="glossary-header" />
-              <Card.Body className="pb-4">
-                <Card.Title>Free Information</Card.Title>
-                <Card.Text>
-                  General knowledge from the firm. A daily, weekly, bi-annual
-                  post.
-                </Card.Text>
-                <Link to="/whatsnew" style={{ color: "#bfa36f" }}>
-                  Read more
-                </Link>
-              </Card.Body>
-            </Card>
+          <Col className="p-1 h-auto">
+            {freeInfo.map(({ blogTitle, blogContent }) => (
+              <Card key={freeInfo.doc} style={{ height: "100%" }}>
+                <Card.Img variant="top" src={freephoto} alt="glossary-header" />
+                <Card.Body className="pb-4">
+                  <Card.Title className="text-uppercase">
+                    <h5>{blogTitle}</h5>
+                  </Card.Title>
+                  <Card.Text>{blogContent}</Card.Text>
+                  <Link to="/whatsnew" style={{ color: "#bfa36f" }}>
+                    Read more
+                  </Link>
+                </Card.Body>
+              </Card>
+            ))}
           </Col>
         </Row>
         <Row noGutters={true} className="pt-3" xs={1} md={1} lg={1}>
