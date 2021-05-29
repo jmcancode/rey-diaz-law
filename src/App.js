@@ -16,36 +16,36 @@ import DidYouKnowDetail from "./pages/didyouknowdetails";
 import LegalGlossary from "./pages/glossary";
 import LegalResources from "./pages/resources";
 import WhatsNewBlog from "./pages/whatsnew";
-import firebase from "./Firebase/config";
-import { messaging } from "firebase-admin";
 
 function App() {
-  if ("serviceWorkerRegistration" in navigator) {
+  if ("serviceWorker" in navigator) {
     navigator.serviceWorker
       .register("firebase-messaging-sw.js")
       .then(function (registration) {
-        console.error("[SW]: SCOPE: ", registration.scope);
+        // eslint-disable-next-line no-console
+        console.log("[SW]: SCOPE: ", registration.scope);
         return registration.scope;
       })
-      .catch((err) => {
+      .catch(function (err) {
         return err;
       });
   }
 
   useEffect(() => {
-    Notification.requestPermission()
-      .then(() =>
-        messaging.getToken({
-          vapidKey: process.env.REACT_APP_VAPID_KEY,
-        })
-      )
-      .then((currentToken) => {
-        console.log(currentToken)
-        firebase.firestore().collection('notification').add()
-      })
-      .catch((err) => {
-        console.warn(err);
-      });
+    Notification.requestPermission((result) => {
+      if (result === "granted") {
+        if ("Notification" in window) {
+          navigator.serviceWorker.ready.then((registration) => {
+            registration.showNotification("Rey Diaz Law", {
+              body: "Your account has a new document",
+              tag: "j12dev-sample",
+            });
+          });
+        }
+      }
+    }).catch((err) => {
+      console.warn(err);
+    });
   }, []);
 
   return (

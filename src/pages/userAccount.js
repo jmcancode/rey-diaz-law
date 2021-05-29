@@ -14,7 +14,7 @@ import { Plus } from "react-bootstrap-icons";
 import { useDropzone } from "react-dropzone";
 import { motion } from "framer-motion";
 import { db } from "../Firebase/config";
-import { useAuth } from "../Firebase/context";
+// import { useAuth } from "../Firebase/context";
 
 const baseStyle = {
   flex: 1,
@@ -57,8 +57,8 @@ export default function UserAccount() {
   const [zip, setZip] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [loader, setLoader] = useState("");
-  const { currentUser } = useAuth();
-  const [users, setUsers] = useState([]);
+  // const { currentUser } = useAuth();
+  // const [users, setUsers] = useState([]);
 
   const handleUserSubmit = async (e) => {
     e.preventDefault();
@@ -102,11 +102,11 @@ export default function UserAccount() {
     setImageUrl("");
   };
 
-  useEffect(() => {
-    db.collection("users").onSnapshot((snapshot) =>
-      setUsers(snapshot.docs.map((doc) => doc.data()))
-    );
-  }, []);
+  // useEffect(() => {
+  //   db.collection("users").onSnapshot((snapshot) =>
+  //     setUsers(snapshot.docs.map((doc) => doc.data()))
+  //   );
+  // }, []);
 
   const {
     getRootProps,

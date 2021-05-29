@@ -66,8 +66,8 @@ export default function Dashboard() {
       >
         <Row xs={1} md={3} lg={3}>
           <Col className="p-1 h-auto">
-            {dyk.map(({ title, content }) => (
-              <Card key={dyk.doc}>
+            {dyk.map(({ title, content, index }) => (
+              <Card key={index}>
                 <Card.Img
                   className="pb-2"
                   variant="top"
@@ -87,8 +87,8 @@ export default function Dashboard() {
             ))}
           </Col>
           <Col className="p-1 h-auto">
-            {whatsNew.map(({ blogTitle, blogContent }) => (
-              <Card key={whatsNew.doc} style={{ height: "100%" }}>
+            {whatsNew.map(({ blogTitle, blogContent, index }) => (
+              <Card key={index} style={{ height: "100%" }}>
                 <Card.Img variant="top" src={newsphoto} alt="glossary-header" />
                 <Card.Body className="pb-5">
                   <Card.Title className="text-uppercase">
@@ -103,15 +103,15 @@ export default function Dashboard() {
             ))}
           </Col>
           <Col className="p-1 h-auto">
-            {freeInfo.map(({ blogTitle, blogContent }) => (
-              <Card key={freeInfo.doc} style={{ height: "100%" }}>
+            {freeInfo.map(({ blogTitle, blogContent, index }) => (
+              <Card key={index} style={{ height: "100%" }}>
                 <Card.Img variant="top" src={freephoto} alt="glossary-header" />
                 <Card.Body className="pb-4">
                   <Card.Title className="text-uppercase">
                     <h5>{blogTitle}</h5>
                   </Card.Title>
                   <Card.Text>{blogContent}</Card.Text>
-                  <Link to="/whatsnew" style={{ color: "#bfa36f" }}>
+                  <Link to="/freeinfo" style={{ color: "#bfa36f" }}>
                     Read more
                   </Link>
                 </Card.Body>
@@ -134,10 +134,10 @@ export default function Dashboard() {
         <Row className="pt-3 mt-3" xs={1} md={1} lg={1}>
           <Col>
             <Card>
-              <div>
+              <div className="h-100">
                 <InstagramEmbed
                   url="https://www.instagram.com/reydiazlaw"
-                  clientAccessToken=""
+                  clientAccessToken="2926655620880947"
                   maxWidth={320}
                   hideCaption={false}
                   containerTagName="div"
@@ -147,7 +147,7 @@ export default function Dashboard() {
                   onSuccess={() => {}}
                   onAfterRender={() => {}}
                   onFailure={() => {
-                    alert("somethings wrong ");
+                    alert("somethings gone wrong");
                   }}
                 />
               </div>
